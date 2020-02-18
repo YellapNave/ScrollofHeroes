@@ -13,7 +13,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     // TODO: send the message _after_ fetching the heroes
-    this.messageService.add('Hero service: fetching heroes.')
+    this.messageService.add('Hero service: fetched heroes.')
     return of(HEROES);
   }
 }
