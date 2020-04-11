@@ -2,7 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
 import { Hero } from './hero';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { DbService } from './db.service';
 
@@ -12,7 +11,6 @@ import { DbService } from './db.service';
 export class HeroService {
 
   constructor(
-    private http: HttpClient,
     private messageService: MessageService,
     private dbService: DbService
     ) { }
@@ -20,12 +18,6 @@ export class HeroService {
   ngOnInit() {
     this.dbService.initDb();
   }
-    
-  private heroesUrl = 'api/heroes';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
-
   // GET: pull down heroes from database
   getHeroes(): Observable<Hero[]> {
     return from(this.dbService.heroesChapter.find().toArray())
@@ -37,7 +29,6 @@ export class HeroService {
 
   // GET: Pull down hero from database
   getHero(id: number): Observable<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
     return from(this.dbService.heroesChapter.findOne({"id": {$eq: id}}))
       .pipe(
         tap(_ => this.log(`fetched hero id=${id}`)),
@@ -47,11 +38,16 @@ export class HeroService {
 
   // PUT: Update the hero on the server
   updateHero (hero: Hero): Observable<Hero> {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions)
-      .pipe(
-        tap(_ => this.log(`updated hero id=${hero.id}`)),
-        catchError(this.handleError<any>('updateHero'))
-      );
+    return from(this.dbService.heroesChapter
+      .updateOne(
+        {"id": hero.id}, {
+          $set: {player: hero.player },
+         $currentDate: { lastModified: true }
+        }))
+        .pipe(
+          tap(_ => this.log(`updated hero id=${hero.id}`)),
+          catchError(this.handleError<any>('updateHero'))
+        );
   }
 
   // POST: Add a new hero to the server
@@ -64,11 +60,9 @@ export class HeroService {
   }
 
   // DELETE: Delete the hero from the server
-  deleteHero (hero: Hero | number): Observable<Hero> {
+  deleteHero (hero: Hero | number) {
     const id = typeof hero === 'number' ? hero : hero.id;
-    const url = `${this.heroesUrl}/${id}`;
-
-    return this.http.delete<Hero>(url, this.httpOptions)
+    from(this.dbService.heroesChapter.deleteOne({"id": id}))
       .pipe(
         tap(_ => this.log(`deleted hero id=${id}`)),
         catchError(this.handleError<Hero>('deleteHero'))
@@ -81,13 +75,15 @@ export class HeroService {
       // if search term is falsy, return empty hero array
       return of([]);
     }
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`)
-      .pipe(
-        tap(x => x.length ?
-          this.log(`found heroes matching "${term}"`) :
-          this.log(`no heroes matching "${term}"`)),
-        catchError(this.handleError<Hero[]>('searchHeroes', []))
-      );
+    return from(this.dbService.heroesChapter
+            .find({name: {$regex: `^${term}`, $options: "i"}})
+            .toArray())
+              .pipe(
+                tap(x => x.length ?
+                  this.log(`found heroes matching "${term}"`) :
+                  this.log(`no heroes matching "${term}"`)),
+                catchError(this.handleError<Hero[]>('searchHeroes', []))
+              );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

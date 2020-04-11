@@ -22,20 +22,20 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
-    this.heroes.forEach(element => {
-      console.log(element.id, element.name, element.player);
-    });
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero);
+    const id = this.heroes.length > 0 ? 
+      Math.max(...this.heroes.map(hero => hero.id)) + 1 :
+      1;
+    this.heroService.addHero({ name, id } as Hero);
   }
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService.deleteHero(hero);
   }
 
 }
