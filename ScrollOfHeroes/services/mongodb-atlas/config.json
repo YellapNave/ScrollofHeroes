@@ -1,0 +1,11 @@
+{
+    "id": "5e914ce6377a4bd12dd0c2fe",
+    "name": "mongodb-atlas",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "ScrollOfHeroes",
+        "readPreference": "primary",
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}

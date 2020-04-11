@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
+import { Long, serialize, deserialize } from 'bson';
 
 @Component({
   selector: 'app-heroes',
@@ -26,15 +27,15 @@ export class HeroesComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      })
+    const id = this.heroes.length > 0 ? 
+      Math.max(...this.heroes.map(hero => hero.id)) + 1 :
+      1;
+    this.heroService.addHero({ name, id } as Hero);
   }
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService.deleteHero(hero);
   }
 
 }
