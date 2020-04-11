@@ -29,7 +29,7 @@ export class HeroService {
 
   // GET: Pull down hero from database
   getHero(id: number): Observable<Hero> {
-    return from(this.dbService.heroesChapter.findOne({"id": {$eq: id}}))
+    return from(this.dbService.heroesChapter.findOne({"id": id}))
       .pipe(
         tap(_ => this.log(`fetched hero id=${id}`)),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
