@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { DbService } from './db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,12 @@ export class HeroService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
+    private dbService: DbService
     ) { }
 
+  ngOnInit() {
+    this.dbService.initDb();
+  }
     
   private heroesUrl = 'api/heroes';
   httpOptions = {
@@ -24,8 +28,7 @@ export class HeroService {
 
   // GET: pull down heroes from database
   getHeroes(): Observable<Hero[]> {
-    // TODO: send the message _after_ fetching the heroes
-    return this.http.get<Hero[]>(this.heroesUrl)
+    return from(this.dbService.heroesChapter.find().toArray())
       .pipe(
         tap(_ => this.log('fetched heroes')),
         catchError(this.handleError<Hero[]>('getHeroes', []))
@@ -33,17 +36,17 @@ export class HeroService {
   }
 
   // GET: Pull down hero from database
-
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getHero id=${id}`))
-    );
+    return from(this.dbService.heroesChapter.findOne({"id": {$eq: id}}))
+      .pipe(
+        tap(_ => this.log(`fetched hero id=${id}`)),
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
+      );
   }
 
   // PUT: Update the hero on the server
-  updateHero (hero: Hero): Observable<any> {
+  updateHero (hero: Hero): Observable<Hero> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions)
       .pipe(
         tap(_ => this.log(`updated hero id=${hero.id}`)),
@@ -52,12 +55,12 @@ export class HeroService {
   }
 
   // POST: Add a new hero to the server
-  addHero (hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions)
+  addHero (hero: Hero) {
+    return from(this.dbService.heroesChapter.insertOne(hero))
       .pipe(
-        tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+        tap(_ => this.log(`updated hero id=${hero.id}`)),
         catchError(this.handleError<Hero>('addHero'))
-      )
+      );
   }
 
   // DELETE: Delete the hero from the server
