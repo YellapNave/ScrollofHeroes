@@ -13,10 +13,11 @@ export type pf2Class =
     | 'Wizard';
 
 export type drosAncestry =
-    'Human'
-    | 'Bujyun'
-    | 'Niqqoth'
+    'Bujyun'
+    | 'Goblin'
     | 'Grey'
+    | 'Human'
+    | 'Niqqoth'
     | 'Rokhos'
     | 'Sylvan';
 
