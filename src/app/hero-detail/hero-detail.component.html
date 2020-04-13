@@ -12,6 +12,42 @@
             <input [(ngModel)]="hero.player" placeholder="player"/>
         </label>
     </div>
+    <div>
+        <label>Ancestry:
+            <select [(ngModel)]="hero.ancestry" placeholder="human">
+                <option value='Bujyun'>Bujyun</option>
+                <option value='Goblin'>Goblin</option>
+                <option value='Grey'>Grey</option>
+                <option value='Human'>Human</option>
+                <option value='Niqqoth'>Niqqoth</option>
+                <option value='Rokhos'>Rokhos</option>
+                <option value='Sylvan'>Sylvan</option>
+            </select>
+        </label> 
+    </div>
+    <div>
+        <label>Class: 
+            <select [(ngModel)]="hero.class" placeholder="class">
+                <option value='Alchemist'>Alchemist</option>
+                <option value='Barbarian'>Barbarian</option>
+                <option value='Bard'>Bard</option>
+                <option value='Champion'>Champion</option>
+                <option value='Cleric'>Cleric</option>
+                <option value='Druid'>Druid</option>
+                <option value='Fighter'>Fighter</option>
+                <option value='Monk'>Monk</option>
+                <option value='Ranger'>Ranger</option>
+                <option value='Rogue'>Rogue</option>
+                <option value='Sorcerer'>Sorcerer</option>
+                <option value='Wizard'>Wizard</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label>Level: 
+            <input [(ngModel)]="hero.level" placeholder="1"/>
+        </label>
+    </div>
 </div>
 <button (click)="goBack()">Back</button>
 <button (click)="save()">Save</button>

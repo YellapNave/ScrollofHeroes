@@ -41,7 +41,12 @@ export class HeroService {
     return from(this.dbService.heroesChapter
       .updateOne(
         {"id": hero.id}, {
-          $set: {player: hero.player },
+          $set: {
+                  player: hero.player,
+                  class: hero.class,
+                  level: hero.level,
+                  ancestry: hero.ancestry
+                },
          $currentDate: { lastModified: true }
         }))
         .pipe(
