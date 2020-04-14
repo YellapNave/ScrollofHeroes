@@ -11,7 +11,7 @@ import { Long, serialize, deserialize } from 'bson';
 })
 
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes: Array<any>;
 
   constructor(private heroService: HeroService, private messageService: MessageService) { }
 

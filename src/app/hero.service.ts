@@ -18,8 +18,19 @@ export class HeroService {
   ngOnInit() {
     this.dbService.initDb();
   }
+
   // GET: pull down heroes from database
-  getHeroes(): Observable<Hero[]> {
+  getHeroes(): Observable<any> {
+    return from(new Promise<any>((resolve, reject) => {
+      this.dbService.heroesChapter2.valueChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    }))
+    .pipe(
+      tap(_ => this.log('fetched heroes')),
+      catchError(this.handleError<Hero[]>('getHeroes', []))
+    );
     return from(this.dbService.heroesChapter.find().toArray())
       .pipe(
         tap(_ => this.log('fetched heroes')),
@@ -28,7 +39,18 @@ export class HeroService {
   }
 
   // GET: Pull down hero from database
-  getHero(id: number): Observable<Hero> {
+  getHero(id: number): Observable<any> {
+    return from(new Promise<any>((resolve, reject) => {
+      this.dbService.db2.collection('heroes', ref => ref.where('id', '==', id))
+        .valueChanges()
+        .subscribe(snapshot => {
+          resolve(snapshot)
+        })
+    }))
+      .pipe(
+        tap(_ => this.log(`fetched hero id=${id}`)),
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
+      );
     return from(this.dbService.heroesChapter.findOne({"id": id}))
       .pipe(
         tap(_ => this.log(`fetched hero id=${id}`)),
@@ -57,7 +79,7 @@ export class HeroService {
 
   // POST: Add a new hero to the server
   addHero (hero: Hero) {
-    return from(this.dbService.heroesChapter.insertOne(hero))
+    return from(this.dbService.heroesChapter2.add(hero))
       .pipe(
         tap(_ => this.log(`updated hero id=${hero.id}`)),
         catchError(this.handleError<Hero>('addHero'))
