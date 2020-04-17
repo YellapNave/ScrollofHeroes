@@ -2,115 +2,91 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
 import { Hero } from './hero';
-import { catchError, map, tap } from 'rxjs/operators';
-import { DbService } from './db.service';
+import { catchError, flatMap, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
+import { 
+  AngularFirestoreCollection, 
+  AngularFirestore 
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
+  heroesChapter: AngularFirestoreCollection<Hero> = null;
+  db: AngularFirestore;
 
   constructor(
     private messageService: MessageService,
-    private dbService: DbService
+    private firestore: AngularFirestore
     ) { }
 
-  ngOnInit() {
-    this.dbService.initDb();
+  ngOnInit() { 
+    this.db = this.firestore;
+    this.heroesChapter = this.db.collection<Hero>('/heroes', 
+        ref => ref.orderBy("id"));
+    this.log('fetched heroes')
+   }
+
+  getHeroesList(): AngularFirestoreCollection<Hero> {
+    return this.heroesChapter;
   }
 
-  // GET: pull down heroes from database
-  getHeroes(): Observable<any> {
-    return from(new Promise<any>((resolve, reject) => {
-      this.dbService.heroesChapter2.valueChanges()
-      .subscribe(snapshots => {
-        resolve(snapshots)
-      })
-    }))
+  getHeroes(): Observable<Hero[]> {
+    return this.heroesChapter.valueChanges()
     .pipe(
-      tap(_ => this.log('fetched heroes')),
-      catchError(this.handleError<Hero[]>('getHeroes', []))
+      tap(_ => this.log(`fetched heroes`)),
+      catchError(this.handleError<Hero[]>(`fetching heroes`))
     );
-    return from(this.dbService.heroesChapter.find().toArray())
+  }
+
+  // READ: Pull down hero from database
+  getHero(key: string): Observable<Hero> {
+    const heroDoc = this.heroesChapter.doc<Hero>(key);
+    const hero = heroDoc.valueChanges();
+    return hero
       .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Hero[]>('getHeroes', []))
+        tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
+        catchError(this.handleError<Hero>(`getting hero w/ key=${key}`))
       );
   }
 
-  // GET: Pull down hero from database
-  getHero(id: number): Observable<any> {
-    return from(new Promise<any>((resolve, reject) => {
-      this.dbService.db2.collection('heroes', ref => ref.where('id', '==', id))
-        .valueChanges()
-        .subscribe(snapshot => {
-          resolve(snapshot)
-        })
-    }))
-      .pipe(
-        tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError<Hero>(`getHero id=${id}`))
-      );
-    return from(this.dbService.heroesChapter.findOne({"id": id}))
-      .pipe(
-        tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError<Hero>(`getHero id=${id}`))
-      );
+  // UPDATE: Update hero in the database with new value
+  updateHero(key: string, value: any): Observable<void> {
+    return from(this.heroesChapter.doc(key).update(value))
+    .pipe(
+      tap(_ => this.log(`updated hero ${value.name} (key: ${key})`)),
+      catchError(this.handleError<void>(`updating hero ${value.name} (key: ${key})`))
+    );
   }
 
-  // PUT: Update the hero on the server
-  updateHero (hero: Hero): Observable<Hero> {
-    return from(this.dbService.heroesChapter
-      .updateOne(
-        {"id": hero.id}, {
-          $set: {
-                  player: hero.player,
-                  class: hero.class,
-                  level: hero.level,
-                  ancestry: hero.ancestry
-                },
-         $currentDate: { lastModified: true }
-        }))
-        .pipe(
-          tap(_ => this.log(`updated hero id=${hero.id}`)),
-          catchError(this.handleError<any>('updateHero'))
-        );
+  // CREATE: Add new hero to database
+  async addHero(hero: Hero): Promise<any> {
+    try {
+      const ref = await this.heroesChapter.add({ ...hero });
+      this.log(`added hero ${hero.name} (key: ${ref.id})`);
+      return ref;
+    }
+    catch (ref_1) {
+      return this.handleError<void>(`adding hero ${hero.name} (key: ${ref_1.id})`);
+    }
   }
 
-  // POST: Add a new hero to the server
-  addHero (hero: Hero) {
-    return from(this.dbService.heroesChapter2.add(hero))
-      .pipe(
-        tap(_ => this.log(`updated hero id=${hero.id}`)),
-        catchError(this.handleError<Hero>('addHero'))
-      );
-  }
-
-  // DELETE: Delete the hero from the server
-  deleteHero (hero: Hero | number) {
-    const id = typeof hero === 'number' ? hero : hero.id;
-    from(this.dbService.heroesChapter.deleteOne({"id": id}))
-      .pipe(
-        tap(_ => this.log(`deleted hero id=${id}`)),
-        catchError(this.handleError<Hero>('deleteHero'))
-      )
+  deleteHero(key: string): Promise<any> {
+    return this.heroesChapter.doc(key).delete()
+      .then(_ => {
+        this.log(`deleted hero w/ key: ${key}`);
+      }).catch(this.handleError<void>(`deleting hero w/ key: ${key}`));
   }
 
   // GET: Get hero whose name contains search term
-  searchHeroes (term: string): Observable<Hero[]> {
+  searchHeroes(term: string): Observable<Hero[]> {
     if (!term.trim()) {
       // if search term is falsy, return empty hero array
-      return of([]);
+      return from([]);
     }
-    return from(this.dbService.heroesChapter
-            .find({name: {$regex: `^${term}`, $options: "i"}})
-            .toArray())
-              .pipe(
-                tap(x => x.length ?
-                  this.log(`found heroes matching "${term}"`) :
-                  this.log(`no heroes matching "${term}"`)),
-                catchError(this.handleError<Hero[]>('searchHeroes', []))
-              );
+    return this.db.collection<Hero>('/heroes', 
+              ref => ref.where(term, "in", "name")).valueChanges();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

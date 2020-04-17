@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { MessageService } from '../message.service';
-import { Long, serialize, deserialize } from 'bson';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -11,17 +11,25 @@ import { Long, serialize, deserialize } from 'bson';
 })
 
 export class HeroesComponent implements OnInit {
-  heroes: Array<any>;
+  heroes: Hero[];
 
-  constructor(private heroService: HeroService, private messageService: MessageService) { }
+  constructor(private heroService: HeroService, 
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroesList().snapshotChanges().pipe(
+      map(changes => changes.map(c => (
+        { 
+          key: c.payload.doc.id,
+          ...c.payload.doc.data()
+        }))
+    )).subscribe(heroes => {
+      this.heroes = heroes;
+    });
   }
 
   add(name: string): void {
@@ -30,12 +38,13 @@ export class HeroesComponent implements OnInit {
     const id = this.heroes.length > 0 ? 
       Math.max(...this.heroes.map(hero => hero.id)) + 1 :
       1;
-    this.heroService.addHero({ name, id } as Hero);
+    const newHero = this.heroService.addHero({ id, name } as Hero)
+    // make this navigate to the details page
   }
 
-  delete(hero: Hero): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero);
+  delete(key: string): void {
+    this.heroes = this.heroes.filter(h => h.key !== key);
+    this.heroService.deleteHero(key);
   }
 
 }
