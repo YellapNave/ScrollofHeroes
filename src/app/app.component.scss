@@ -12,7 +12,7 @@ h2 {
 nav {
   text-align: center;
 }
-nav a {
+nav a, button {
   padding: 5px 10px;
   text-decoration: none;
   margin-top: 10px;
@@ -21,10 +21,10 @@ nav a {
   background-color: #eee;
   border-radius: 4px;
 }
-nav a:visited, a:link {
+nav a:visited, a:link, button:visited, button:link {
   color: #334953;
 }
-nav a:hover {
+nav a:hover, nav button:hover {
   color: #039be5;
   background-color: #cfd8dc;
 }

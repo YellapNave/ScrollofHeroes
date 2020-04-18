@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "scroll-of-heroes": {
+      "hosting": {
+        "CharacterApp": [
+          "scroll-of-heroes"
+        ]
+      }
+    }
+  }
+}

@@ -22,11 +22,12 @@ export type drosAncestry =
     | 'Sylvan';
 
 export interface Hero {
+    readonly key: string;
     readonly id: number;
     name: string;
-    player: string;
+    player?: string;
     class?: pf2Class;
-    ancestry: drosAncestry;
+    ancestry?: drosAncestry;
     level?: number;
     stats?: { 
         str: number,

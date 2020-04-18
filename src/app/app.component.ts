@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from './db.service';
+import { HeroService } from './services/hero.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import { DbService } from './db.service';
 export class AppComponent implements OnInit {
   title = 'Scroll of Heroes';
 
-  constructor(private dbService: DbService) {}
+  constructor(private heroService: HeroService,
+              public authService: AuthService) {}
 
   ngOnInit() {
-    this.dbService.initDb();
-  }
+    this.heroService.ngOnInit();
+   }
 }
