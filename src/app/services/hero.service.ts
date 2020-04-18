@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
-import { Hero } from './hero';
+import { Hero } from '../hero';
 import { catchError, flatMap, tap } from 'rxjs/operators';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { 
   AngularFirestoreCollection, 
   AngularFirestore 

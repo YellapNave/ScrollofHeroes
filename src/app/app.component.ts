@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HeroService } from './hero.service';
+import { HeroService } from './services/hero.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { HeroService } from './hero.service';
 export class AppComponent implements OnInit {
   title = 'Scroll of Heroes';
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService,
+              public authService: AuthService) {}
 
   ngOnInit() {
     this.heroService.ngOnInit();

@@ -2,6 +2,12 @@
 <nav>
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/heroes">Heroes</a>
+    <div *ngIf="authService.user | async as user; else login">
+        <a (click)="authService.signOut()">Sign Out</a>
+    </div>
+    <ng-template #login>
+        <a (click)="authService.googleSignin()">Sign In</a>
+    </ng-template>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
