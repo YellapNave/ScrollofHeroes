@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { 
   AngularFireAuthGuard,
   redirectUnauthorizedTo,
   redirectLoggedInTo,
   canActivate
 } from '@angular/fire/auth-guard';
+import { map } from 'rxjs/operators';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';

@@ -38,9 +38,7 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    return this.updateUserData(credential.user).pipe(
-              (tap(_ => this.log(`signed in as: ${credential.user.displayName}`)),
-              this.handleError(`signing in as ${credential.user.displayName}`)));
+    return this.updateUserData(credential.user);
   }
 
   async signOut() {
@@ -53,13 +51,13 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      isAdmin: false
+      displayName: user.displayName
     }
     
-    userRef.set(data, {merge: true});
+    userRef.set(data, {merge: true})
+      .then(prom => {this.log(`signed in as: ${user.displayName}`); return prom;})
+      .catch(this.handleError<any>(`signing in as ${user.displayName}`));
     this.router.navigate(["/signin"]);
-    return user = userRef.valueChanges();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

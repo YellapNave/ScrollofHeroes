@@ -2,6 +2,6 @@ export interface User {
     uid: string;
     email: string;
     displayName: string;
-    isAdmin: boolean;
+    isAdmin?: boolean;
     characters?: string[];
 }
