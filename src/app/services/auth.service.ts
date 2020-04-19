@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/firestore';
 import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { User } from './user.model';
 
 
@@ -38,9 +38,9 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    return this.updateUserData(credential.user)
-              .then(_ => this.log(`signed in as: ${credential.user.displayName}`),
-              _ => this.handleError(`signing in as ${credential.user.displayName}`));
+    return this.updateUserData(credential.user).pipe(
+              (tap(_ => this.log(`signed in as: ${credential.user.displayName}`)),
+              this.handleError(`signing in as ${credential.user.displayName}`)));
   }
 
   async signOut() {
@@ -56,10 +56,10 @@ export class AuthService {
       displayName: user.displayName,
       isAdmin: false
     }
-
-    this.router.navigate(["/","dashboard"]);
-    return userRef.set(data, {merge: true});
-
+    
+    userRef.set(data, {merge: true});
+    this.router.navigate(["/signin"]);
+    return user = userRef.valueChanges();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
