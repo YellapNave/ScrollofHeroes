@@ -26,7 +26,7 @@ export class HeroService {
   ngOnInit() { 
     this.db = this.firestore;
     this.heroesChapter = this.db.collection<Hero>('/heroes', 
-        ref => ref.orderBy("id"));
+        ref => ref.orderBy('id'));
     this.log('fetched heroes')
    }
 
@@ -88,7 +88,8 @@ export class HeroService {
       return from([]);
     }
     return this.db.collection<Hero>('/heroes', 
-              ref => ref.where(term, "in", "name")).valueChanges();
+              ref => ref.where('name', '==', term))
+                        .valueChanges();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

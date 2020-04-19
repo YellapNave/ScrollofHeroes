@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../services/hero';
 import { HeroService } from '../services/hero.service';
+import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -11,25 +12,19 @@ import { Router } from '@angular/router';
 })
 
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes: Hero[] = [];
 
   constructor(private heroService: HeroService, 
-              private router: Router) { }
+              private router: Router,
+              public authService: AuthService) { }            
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroesList().snapshotChanges().pipe(
-      map(changes => changes.map(c => (
-        { 
-          key: c.payload.doc.id,
-          ...c.payload.doc.data()
-        }))
-    )).subscribe(heroes => {
-      this.heroes = heroes;
-    });
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
   }
 
   add(name: string): void {

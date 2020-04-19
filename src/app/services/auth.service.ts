@@ -56,6 +56,8 @@ export class AuthService {
       displayName: user.displayName
     }
 
+    this.router.navigate(["/","dashboard"]);
+
     return userRef.update(data);
 
   }
