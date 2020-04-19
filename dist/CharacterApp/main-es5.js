@@ -1863,8 +1863,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee() {
-            var _this8 = this;
-
             var provider, credential;
             return regeneratorRuntime.wrap(function _callee$(_context) {
               while (1) {
@@ -1876,9 +1874,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 3:
                     credential = _context.sent;
-                    return _context.abrupt("return", this.updateUserData(credential.user).pipe((Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) {
-                      return _this8.log("signed in as: ".concat(credential.user.displayName));
-                    }), this.handleError("signing in as ".concat(credential.user.displayName)))));
+                    return _context.abrupt("return", this.updateUserData(credential.user));
 
                   case 5:
                   case "end":
@@ -1912,18 +1908,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "updateUserData",
         value: function updateUserData(user) {
+          var _this8 = this;
+
           var userRef = this.db.doc("/users/".concat(user.uid));
           var data = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-            isAdmin: false
+            displayName: user.displayName
           };
           userRef.set(data, {
             merge: true
-          });
+          }).then(function (prom) {
+            _this8.log("signed in as: ".concat(user.displayName));
+
+            return prom;
+          }).catch(this.handleError("signing in as ".concat(user.displayName)));
           this.router.navigate(["/signin"]);
-          return user = userRef.valueChanges();
         }
       }, {
         key: "handleError",
