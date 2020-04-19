@@ -1876,11 +1876,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 3:
                     credential = _context.sent;
-                    return _context.abrupt("return", this.updateUserData(credential.user).then(function (_) {
+                    return _context.abrupt("return", this.updateUserData(credential.user).pipe((Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) {
                       return _this8.log("signed in as: ".concat(credential.user.displayName));
-                    }, function (_) {
-                      return _this8.handleError("signing in as ".concat(credential.user.displayName));
-                    }));
+                    }), this.handleError("signing in as ".concat(credential.user.displayName)))));
 
                   case 5:
                   case "end":
@@ -1921,10 +1919,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             displayName: user.displayName,
             isAdmin: false
           };
-          this.router.navigate(["/", "dashboard"]);
-          return userRef.set(data, {
+          userRef.set(data, {
             merge: true
           });
+          this.router.navigate(["/signin"]);
+          return user = userRef.valueChanges();
         }
       }, {
         key: "handleError",

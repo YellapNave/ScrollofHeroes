@@ -846,8 +846,8 @@ class AuthService {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const provider = new firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"].GoogleAuthProvider();
             const credential = yield this.afAuth.signInWithPopup(provider);
-            return this.updateUserData(credential.user)
-                .then(_ => this.log(`signed in as: ${credential.user.displayName}`), _ => this.handleError(`signing in as ${credential.user.displayName}`));
+            return this.updateUserData(credential.user).pipe((Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.log(`signed in as: ${credential.user.displayName}`)),
+                this.handleError(`signing in as ${credential.user.displayName}`)));
         });
     }
     signOut() {
@@ -863,8 +863,9 @@ class AuthService {
             displayName: user.displayName,
             isAdmin: false
         };
-        this.router.navigate(["/", "dashboard"]);
-        return userRef.set(data, { merge: true });
+        userRef.set(data, { merge: true });
+        this.router.navigate(["/signin"]);
+        return user = userRef.valueChanges();
     }
     handleError(operation = 'operation', result) {
         return (error) => {
