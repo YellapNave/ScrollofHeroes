@@ -1,13 +1,10 @@
 <h1>{{title}}</h1>
-<nav>
+<nav *ngIf="authService.user | async as user">
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/heroes">Heroes</a>
-    <div *ngIf="authService.user | async as user; else login">
-        <a (click)="authService.signOut()">Sign Out</a>
-    </div>
-    <ng-template #login>
-        <a (click)="authService.googleSignin()">Sign In</a>
-    </ng-template>
+    <a routerLink="/signin">Account</a>
 </nav>
 <router-outlet></router-outlet>
-<app-messages></app-messages>
+<div *ngIf="authService.user | async as user">
+    <app-messages *ngIf="user.isAdmin"></app-messages>
+</div>
