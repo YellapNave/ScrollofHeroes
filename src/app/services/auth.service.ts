@@ -16,7 +16,7 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  user: Observable<User>;
+  user$: Observable<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,7 +24,7 @@ export class AuthService {
     private router: Router,
     private messageService: MessageService
   ) { 
-    this.user = this.afAuth.authState.pipe(
+    this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           return this.db.doc<User>(`/users/${user.uid}`).valueChanges();

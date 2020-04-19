@@ -25,7 +25,7 @@ export class HeroService {
     ) { }
 
   ngOnInit() { 
-    this.authService.user.subscribe(user => this.user = user);
+    this.authService.user$.subscribe(user => this.user = user);
     this.db = this.firestore;
     this.heroesChapter = this.db.collection<Hero>('/heroes', 
         ref => ref.orderBy('id'));

@@ -1,10 +1,10 @@
 <h1>{{title}}</h1>
-<nav *ngIf="authService.user | async as user">
+<nav *ngIf="authService.user$ | async as user">
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/heroes">Heroes</a>
     <a routerLink="/signin">Account</a>
 </nav>
 <router-outlet></router-outlet>
-<div *ngIf="authService.user | async as user">
+<div *ngIf="authService.user$ | async as user">
     <app-messages *ngIf="user.isAdmin"></app-messages>
 </div>

@@ -1,52 +1,64 @@
-<div *ngIf="hero">
-    <h2>{{hero.name | titlecase}} Details</h2>
-    <div><span>id: </span>{{hero.id}}</div>
-    <div>
-        <label>Name: 
-            <input [(ngModel)]="hero.name" placeholder="name"/>
-        </label>
+<div class="detail-component">
+    <div *ngIf="hero">
+        <h2>{{hero.name | titlecase}} Details</h2>
+        <div>
+            <label>Name: 
+                <input [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.name" placeholder="Name"/>
+            </label>
+        </div>
+        <div>
+            <label>Player: 
+                <input [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.player" placeholder="Player"/>
+            </label>
+        </div>
+        <div>
+            <label>Ancestry:
+                <select [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.ancestry" placeholder="Human">
+                    <option value='Bujyun'>Bujyun</option>
+                    <option value='Goblin'>Goblin</option>
+                    <option value='Grey'>Grey</option>
+                    <option value='Human'>Human</option>
+                    <option value='Niqqoth'>Niqqoth</option>
+                    <option value='Rokhos'>Rokhos</option>
+                    <option value='Sylvan'>Sylvan</option>
+                </select>
+            </label> 
+        </div>
+        <div>
+            <label>Class: 
+                <select [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.class" placeholder="Alchemist">
+                    <option value='Alchemist'>Alchemist</option>
+                    <option value='Barbarian'>Barbarian</option>
+                    <option value='Bard'>Bard</option>
+                    <option value='Champion'>Champion</option>
+                    <option value='Cleric'>Cleric</option>
+                    <option value='Druid'>Druid</option>
+                    <option value='Fighter'>Fighter</option>
+                    <option value='Monk'>Monk</option>
+                    <option value='Ranger'>Ranger</option>
+                    <option value='Rogue'>Rogue</option>
+                    <option value='Sorcerer'>Sorcerer</option>
+                    <option value='Wizard'>Wizard</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>Level: 
+                <input [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.level" placeholder="1"/>
+            </label>
+        </div>
+        <div class="notes">
+            <label>Notes:
+                <textarea [disabled]="!userOwnsHero" 
+                [(ngModel)]="hero.notes" placeholder="Take some notes!"></textarea>
+            </label>
+        </div>
     </div>
-    <div>
-        <label>Player: 
-            <input [(ngModel)]="hero.player" placeholder="player"/>
-        </label>
-    </div>
-    <div>
-        <label>Ancestry:
-            <select [(ngModel)]="hero.ancestry" placeholder="Human">
-                <option value='Bujyun'>Bujyun</option>
-                <option value='Goblin'>Goblin</option>
-                <option value='Grey'>Grey</option>
-                <option value='Human'>Human</option>
-                <option value='Niqqoth'>Niqqoth</option>
-                <option value='Rokhos'>Rokhos</option>
-                <option value='Sylvan'>Sylvan</option>
-            </select>
-        </label> 
-    </div>
-    <div>
-        <label>Class: 
-            <select [(ngModel)]="hero.class" placeholder="Alchemist">
-                <option value='Alchemist'>Alchemist</option>
-                <option value='Barbarian'>Barbarian</option>
-                <option value='Bard'>Bard</option>
-                <option value='Champion'>Champion</option>
-                <option value='Cleric'>Cleric</option>
-                <option value='Druid'>Druid</option>
-                <option value='Fighter'>Fighter</option>
-                <option value='Monk'>Monk</option>
-                <option value='Ranger'>Ranger</option>
-                <option value='Rogue'>Rogue</option>
-                <option value='Sorcerer'>Sorcerer</option>
-                <option value='Wizard'>Wizard</option>
-            </select>
-        </label>
-    </div>
-    <div>
-        <label>Level: 
-            <input [(ngModel)]="hero.level" placeholder="1"/>
-        </label>
-    </div>
+    <button (click)="goBack()">Back</button>
+    <button [disabled]="!userOwnsHero" (click)="save()">Save</button>
 </div>
-<button (click)="goBack()">Back</button>
-<button (click)="save()">Save</button>

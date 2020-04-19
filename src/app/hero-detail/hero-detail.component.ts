@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 import { Hero } from '../services/hero';
 import { HeroService } from '../services/hero.service';
 import { take } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { User } from '../services/user.model';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-hero-detail',
@@ -13,13 +16,17 @@ import { take } from 'rxjs/operators';
 
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
+  userOwnsHero: Boolean;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
+    private authService: AuthService,
     private location: Location) { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe(user => this.userOwnsHero = 
+      user.characters.includes(this.hero.key) || user.isAdmin);
     this.getHero();
   }
 

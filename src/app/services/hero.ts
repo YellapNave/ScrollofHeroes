@@ -37,4 +37,5 @@ export interface Hero {
         wis: number,
         cha: number
     }
+    notes?: string;
 }

@@ -7,7 +7,7 @@ label {
   font-weight: bold;
 }
 
-input, select {
+input, select, textarea {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
@@ -39,4 +39,33 @@ button:disabled {
   background-color: #eee;
   color: #aaa;
   cursor: auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.notes {
+  display: block;
+  position: absolute;
+  left: 880px;
+  top: 160px;
+  height: 346px; 
+  width: 480px;
+}
+
+.notes label {
+  height: 100%;
+  width: 100%;
+}
+
+.notes textarea {
+  height: 100%;
+  width: 100%;
+}
+
+.detail-component {
+  width: 15%;
+  margin: auto;
+  min-width: 550px;
 }
