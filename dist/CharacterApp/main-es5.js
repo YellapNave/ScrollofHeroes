@@ -1918,10 +1918,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var data = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName
+            displayName: user.displayName,
+            isAdmin: false
           };
           this.router.navigate(["/", "dashboard"]);
-          return userRef.update(data);
+
+          if (userRef) {
+            return userRef.update(data);
+          } else {
+            return userRef.set(data);
+          }
         }
       }, {
         key: "handleError",

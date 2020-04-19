@@ -860,10 +860,16 @@ class AuthService {
         const data = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName
+            displayName: user.displayName,
+            isAdmin: false
         };
         this.router.navigate(["/", "dashboard"]);
-        return userRef.update(data);
+        if (userRef) {
+            return userRef.update(data);
+        }
+        else {
+            return userRef.set(data);
+        }
     }
     handleError(operation = 'operation', result) {
         return (error) => {

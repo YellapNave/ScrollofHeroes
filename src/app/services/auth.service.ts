@@ -53,12 +53,12 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName
+      displayName: user.displayName,
+      isAdmin: false
     }
 
     this.router.navigate(["/","dashboard"]);
-
-    return userRef.update(data);
+    return userRef.set(data, {merge: true});
 
   }
 
