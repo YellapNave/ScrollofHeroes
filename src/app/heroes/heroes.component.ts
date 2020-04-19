@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../services/hero';
 import { HeroService } from '../services/hero.service';
 import { AuthService } from '../services/auth.service';
-import { map } from 'rxjs/operators';
+import { tap, take, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService, 
+  constructor(private heroService: HeroService,
+              private messageService: MessageService, 
               private router: Router,
               public authService: AuthService) { }            
 
@@ -33,8 +35,8 @@ export class HeroesComponent implements OnInit {
     const id = this.heroes.length > 0 ? 
       Math.max(...this.heroes.map(hero => hero.id)) + 1 :
       1;
-    const newHero = this.heroService.addHero({ id, name } as Hero)
-    // make this navigate to the details page
+    this.heroService.addHero({ id, name } as Hero).pipe(take(1))
+    .subscribe(newHero => this.router.navigate([`/detail/${newHero.key}`]));
   }
 
   delete(key: string): void {

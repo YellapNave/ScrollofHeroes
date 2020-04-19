@@ -3,11 +3,11 @@ import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
 import { Hero } from './hero';
-import { catchError, flatMap, tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { catchError, flatMap, tap, take } from 'rxjs/operators';
+import { User } from './user.model';
 import { 
   AngularFirestoreCollection, 
-  AngularFirestore 
+  AngularFirestore
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -16,6 +16,7 @@ import {
 export class HeroService {
   heroesChapter: AngularFirestoreCollection<Hero> = null;
   db: AngularFirestore;
+  user: User;
 
   constructor(
     private messageService: MessageService,
@@ -24,15 +25,11 @@ export class HeroService {
     ) { }
 
   ngOnInit() { 
+    this.authService.user.subscribe(user => this.user = user);
     this.db = this.firestore;
     this.heroesChapter = this.db.collection<Hero>('/heroes', 
         ref => ref.orderBy('id'));
-    this.log('fetched heroes')
    }
-
-  getHeroesList(): AngularFirestoreCollection<Hero> {
-    return this.heroesChapter;
-  }
 
   getHeroes(): Observable<Hero[]> {
     return this.heroesChapter.valueChanges()
@@ -45,12 +42,10 @@ export class HeroService {
   // READ: Pull down hero from database
   getHero(key: string): Observable<Hero> {
     const heroDoc = this.heroesChapter.doc<Hero>(key);
-    const hero = heroDoc.valueChanges();
-    return hero
-      .pipe(
-        tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
-        catchError(this.handleError<Hero>(`getting hero w/ key=${key}`))
-      );
+    return heroDoc.valueChanges().pipe(
+      take(1),
+      tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
+      catchError(this.handleError<Hero>(`getting hero w/ key=${key}`)));
   }
 
   // UPDATE: Update hero in the database with new value
@@ -63,15 +58,11 @@ export class HeroService {
   }
 
   // CREATE: Add new hero to database
-  async addHero(hero: Hero): Promise<any> {
-    try {
-      const ref = await this.heroesChapter.add({ ...hero });
-      this.log(`added hero ${hero.name} (key: ${ref.id})`);
-      return ref;
-    }
-    catch (ref_1) {
-      return this.handleError<void>(`adding hero ${hero.name} (key: ${ref_1.id})`);
-    }
+  addHero(hero: Hero): Observable<Hero> {
+    const key = this.db.createId();
+    const ref = this.heroesChapter.doc<Hero>(key);
+    ref.set({key: key, ...hero});
+    return ref.valueChanges().pipe(take(1));
   }
 
   deleteHero(key: string): Promise<any> {

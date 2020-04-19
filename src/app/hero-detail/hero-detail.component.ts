@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Hero } from '../services/hero';
 import { HeroService } from '../services/hero.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hero-detail',
@@ -33,7 +34,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero.key, this.hero)
+    this.heroService.updateHero(this.hero.key, this.hero).pipe(take(1))
       .subscribe(hero => this.goBack());
   }
 }
