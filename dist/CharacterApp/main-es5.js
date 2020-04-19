@@ -1922,12 +1922,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             isAdmin: false
           };
           this.router.navigate(["/", "dashboard"]);
-
-          if (userRef) {
-            return userRef.update(data);
-          } else {
-            return userRef.set(data);
-          }
+          return userRef.set(data, {
+            merge: true
+          });
         }
       }, {
         key: "handleError",

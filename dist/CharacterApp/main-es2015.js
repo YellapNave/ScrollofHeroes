@@ -864,12 +864,7 @@ class AuthService {
             isAdmin: false
         };
         this.router.navigate(["/", "dashboard"]);
-        if (userRef) {
-            return userRef.update(data);
-        }
-        else {
-            return userRef.set(data);
-        }
+        return userRef.set(data, { merge: true });
     }
     handleError(operation = 'operation', result) {
         return (error) => {
