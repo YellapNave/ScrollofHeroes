@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
+import { AuthService } from './auth.service';
 import { Hero } from '../hero';
 import { catchError, flatMap, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -18,7 +19,8 @@ export class HeroService {
 
   constructor(
     private messageService: MessageService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private authService: AuthService
     ) { }
 
   ngOnInit() { 
