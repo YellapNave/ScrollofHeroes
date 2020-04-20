@@ -69,3 +69,18 @@ h2 {
   margin: auto;
   min-width: 550px;
 }
+
+@media (max-width: 1024px) {
+  h2 {
+    text-align: left;
+  }
+  .notes {
+    display: block;
+    position: static;
+    height: 60vh;
+    width: 80vw;
+  }
+  button {
+    margin-top: 5vh;
+  }
+}

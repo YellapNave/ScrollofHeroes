@@ -109,3 +109,9 @@ h3 {
   width: 50%;
   margin: auto;
 }
+
+@media (max-width: 1024px) {
+  .hero {
+    width: 100%;
+  }
+}

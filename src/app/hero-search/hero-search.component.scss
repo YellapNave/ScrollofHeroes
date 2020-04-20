@@ -50,8 +50,14 @@ input {
   border: 2px solid #45A29E;
 }
 
-#search-component {
-  width: 25%;
+#search-box {
+  width: 15%;
   display: block;
   margin: auto;
+}
+
+@media (max-width: 600px) {
+  #search-box {
+    width: 40%;
+  }
 }
