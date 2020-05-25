@@ -10,6 +10,7 @@ import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { User } from './user.model';
+import { Campaign } from './campaign';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ import { User } from './user.model';
 })
 export class AuthService {
   user$: Observable<User>;
+  campaign: AngularFirestoreDocument<Campaign>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -33,7 +35,10 @@ export class AuthService {
         }
       })
     )
+    this.user$.subscribe(user => this.campaign = user.playerIn[0]);
   }
+
+  ngOnInit() { }
 
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
@@ -51,7 +56,8 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName
+      displayName: user.displayName,
+      playerIn: user.playerIn,
     }
     
     userRef.set(data, {merge: true})

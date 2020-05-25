@@ -25,6 +25,7 @@ export interface Hero {
     readonly key: string;
     readonly id: number;
     name: string;
+    campaign: string;
     player?: string;
     class?: pf2Class;
     ancestry?: drosAncestry;

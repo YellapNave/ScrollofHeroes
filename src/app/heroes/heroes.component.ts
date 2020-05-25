@@ -24,8 +24,10 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    this.authService.user$.subscribe(user => {
+      this.heroService.getHeroes().subscribe(
+        heroes => this.heroes = heroes);
+      })
   }
 
   add(name: string): void {
@@ -42,5 +44,7 @@ export class HeroesComponent implements OnInit {
     this.heroes = this.heroes.filter(h => h.key !== key);
     this.heroService.deleteHero(key);
   }
+
+  
 
 }

@@ -9,27 +9,34 @@ import {
   AngularFirestoreCollection, 
   AngularFirestore
 } from '@angular/fire/firestore';
+import { Campaign } from './campaign';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
-  heroesChapter: AngularFirestoreCollection<Hero> = null;
+  heroesChapter: AngularFirestoreCollection<Hero>;
   db: AngularFirestore;
   user: User;
+  campaign: Campaign;
 
   constructor(
     private messageService: MessageService,
     private firestore: AngularFirestore,
     private authService: AuthService
-    ) { }
+    ) { 
+      this.db = this.firestore;
+      this.authService.user$.subscribe(user => { 
+        console.log(user);
+        this.user = user;
+        this.campaign = user.playerIn[0]; 
+        this.heroesChapter = this.db.collection<Hero>('/heroes', 
+          ref => ref.where('campaign', '==', user.playerIn[0].id));
+      });
+    }
 
   ngOnInit() { 
-    this.authService.user$.subscribe(user => this.user = user);
-    this.db = this.firestore;
-    this.heroesChapter = this.db.collection<Hero>('/heroes', 
-        ref => ref.orderBy('id'));
-   }
+  }
 
   getHeroes(): Observable<Hero[]> {
     return this.heroesChapter.valueChanges()

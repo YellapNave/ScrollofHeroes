@@ -1,8 +1,19 @@
-<div *ngIf="authService.user$ | async as user; else login">
-    <h3>Currently logged in as: {{user.displayName}}</h3>
-    <button class="button" (click)="authService.signOut()">Sign Out</button>
+<div>
+    <label>Please select a campaign: </label>
+        <select name="campaign" 
+            [(ngModel)]="authService.campaign">
+            <option *ngFor="let campaign of campaignList | async" 
+                [ngValue]="campaign"
+                [selected]="campaign == authService.campaign.ref">
+                    {{ campaign.name }}
+            </option>
+        </select>
 </div>
 <ng-template #login>
     <h3>Please sign in with Google below.</h3>
     <button class="button" (click)="authService.googleSignin()">Sign In</button>
 </ng-template>
+<div *ngIf="user; else login">
+    <h3>Currently logged in as: {{user.displayName}}</h3>
+    <button class="button" (click)="authService.signOut()">Sign Out</button>
+</div>
