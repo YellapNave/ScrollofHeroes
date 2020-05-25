@@ -1,10 +1,11 @@
 /* HeroesComponent's private CSS styles */
 .heroes {
-  display: block;
+  justify-content: space-between;
   margin: auto;
   list-style-type: none;
   padding: 0;
-  width: 15em;
+  min-width: 15em;
+  width: 75%;
 }
 
 .heroes li {
@@ -13,8 +14,8 @@
   background-color: #181818;
   color: white;
   margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
+  padding: 0;
+  height: 3em;
   border-radius: 4px;
   border: 2px solid #45A29E;
 }
@@ -26,14 +27,14 @@
 .heroes a {
   display: inline-block;
   position: absolute;
-  top: -0.15em;
   line-height: normal;
   color: white;
   text-decoration: none;
   position: relative;
   display: block;
-  width: 250px;
-  height: 1.9em;
+  min-width: 250px;
+  width: 100%;
+  height: 3em;
 }
 
 .heroes a:hover {
@@ -42,16 +43,17 @@
 
 .heroes .badge {
   display: inline-block;
-  font-size: small;
   color: white;
-  padding: 1em 0.7em 0 0.7em;
+  font-size: small;
+  padding: 1em 0.7em 1em 0.7em;
   background-color:#45A29E;
-  line-height: 1em;
+  line-height: 2em;
   position: relative;
   left: -1px;
-  top: -3px;
-  height: 1.8em;
-  min-width: 16px;
+  top: -1px;
+  height: 3rem;
+  min-width: 3rem;
+  width: 2vw;
   text-align: right;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
@@ -59,8 +61,8 @@
 
 button.delete {
   position: relative;
-  left: 194px;
-  top: -32px;
+  left: 95%;
+  top: -2.75rem;
   color: white;
 }
 
@@ -77,8 +79,6 @@ button {
   color: white;
   border-radius: 4px;
   border: 2px solid #45A29E;
-  margin-bottom: 12px;
-  cursor: pointer;
   cursor: hand;
 }
 
@@ -97,17 +97,23 @@ input {
   background-color: black;
   color: white;
   border: 2px solid #45A29E;
-  margin-right: 1.7em;
 }
 
 h3 {
   text-align: center;
+  margin-top: 2.5vh;
 }
 
-.hero {
-  display: block;
-  width: 50%;
+label {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: flex;
+  justify-content: space-between;
   margin: auto;
+}
+
+.container {
+  margin: auto;
+  justify-content: center;
 }
 
 @media (max-width: 1024px) {

@@ -1,8 +1,20 @@
-<div *ngIf="authService.user$ | async as user; else login">
-    <h3>Currently logged in as: {{user.displayName}}</h3>
-    <button class="button" (click)="authService.signOut()">Sign Out</button>
-</div>
 <ng-template #login>
     <h3>Please sign in with Google below.</h3>
     <button class="button" (click)="authService.googleSignin()">Sign In</button>
 </ng-template>
+<div *ngIf="user; else login">
+    <h3>Currently logged in as: {{ user.displayName }}</h3>
+    <div>
+        <h4>Please select a campaign:</h4>
+            <select name="campaign" 
+                [(ngModel)]="campaign"
+                (ngModelChange)="changeCampaign(campaign)">
+                <option *ngFor="let cam of settings.campaignList" 
+                    [ngValue]="cam"
+                    [selected]="cam == campaign">
+                        {{ cam.title }}
+                </option>
+            </select>
+    </div>
+    <button class="button" (click)="authService.signOut()">Sign Out</button>
+</div>

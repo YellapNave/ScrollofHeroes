@@ -1,21 +1,47 @@
-<div class="hero">
-    <h3>My Heroes</h3>
-    <div class="heroes">
-        <label>Hero name:
-            <input #heroName>
-            <button (click)="add(heroName.value); heroName.value=''">
-                Add
-            </button>
-        </label>
-        <!-- (click) passes input value to add() and then clears the input -->
+<div *ngIf="heroes.length !== 0; else loading" class="container">
+    <div class="row">
+        <div class="heroes col-4">
+            <h3>My Heroes</h3>
+        </div>
     </div>
-    <ul class="heroes">
-        <li *ngFor="let hero of heroes">
-            <a routerLink="/detail/{{hero.key}}">
-                <span class="badge">{{hero.id}}</span> {{hero.name}}
-            </a>
-            <button class="delete" title="delete hero"
-                (click)="delete(hero.key)">X</button>
-        </li>
-    </ul>
+    <div class="row justify-content-center align-items-baseline">
+        <div class="input-group mb-3 col-6">
+            <input #heroName type="text" 
+                    class="form-control" 
+                    placeholder="New hero" 
+                    aria-label="New hero" 
+                    aria-describedby="inputGroup-sizing-sm">
+            <div class="input-group-append">
+                 <!-- (click) passes input value to add() and then clears the input -->
+                <button (click)="add(heroName.value); heroName.value=''"
+                        class="btn btn-outline-secondary" 
+                        type="button">Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="justify-content-center align-items-baseline">
+        <div class="heroes col-6">
+        <ul class="heroes">
+            <li *ngFor="let hero of heroes">
+                <a routerLink="/detail/{{hero.key}}">
+                    <span *ngIf="hero.class; else nameBadge" class="badge">
+                        {{ hero.class.substr(0, 3) }}
+                    </span> 
+                    <ng-template #nameBadge> <!-- Graphical errors occur otherwise -->
+                        <span class="badge">
+                            {{ hero.name.substr(0, 3) }}
+                        </span>
+                    </ng-template>
+                    {{hero.name | firstword}}
+                </a>
+                <button class="delete" title="delete hero"
+                    (click)="delete(hero.key)">X</button>
+            </li>
+        </ul>
+        </div>
+    </div>
 </div>
+<ng-template #loading class="hero">
+    <h3>Loading...</h3>
+</ng-template>

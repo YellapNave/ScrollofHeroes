@@ -1,51 +1,68 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
+import { catchError, tap, take } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
-import { Hero } from './hero';
-import { catchError, flatMap, tap, take } from 'rxjs/operators';
-import { User } from './user.model';
+import { Hero } from '../models/hero.model';
+import { User } from '../models/user.model';
 import { 
   AngularFirestoreCollection, 
   AngularFirestore
 } from '@angular/fire/firestore';
+import { Campaign } from '../models/campaign.model';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
-  heroesChapter: AngularFirestoreCollection<Hero> = null;
+  heroesChapter: AngularFirestoreCollection<Hero>;
   db: AngularFirestore;
   user: User;
+  campaign: Campaign;
 
   constructor(
     private messageService: MessageService,
     private firestore: AngularFirestore,
-    private authService: AuthService
-    ) { }
+    private authService: AuthService,
+    private settings: SettingsService
+    ) { 
+      this.db = this.firestore;
+      this.authService.user$.subscribe(user => {
+        this.user = user;
+      });
+      this.settings.campaign$.subscribe(campaign => {
+        this.heroesChapter = 
+          this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
+          this.log(`Fetched campaign: ${campaign.title}`);
+      })
+    }
 
-  ngOnInit() { 
-    this.authService.user$.subscribe(user => this.user = user);
-    this.db = this.firestore;
-    this.heroesChapter = this.db.collection<Hero>('/heroes', 
-        ref => ref.orderBy('id'));
-   }
+  ngOnInit() { }
 
   getHeroes(): Observable<Hero[]> {
-    return this.heroesChapter.valueChanges()
-    .pipe(
-      tap(_ => this.log(`fetched heroes`)),
-      catchError(this.handleError<Hero[]>(`fetching heroes`))
-    );
+    if (this.heroesChapter) {
+      return this.heroesChapter.valueChanges()
+      .pipe(
+        tap(_ => this.log(`fetched heroes`)),
+        catchError(this.handleError<Hero[]>(`fetching heroes`))
+      );
+    } else {
+      return of([]);
+    }
   }
 
   // READ: Pull down hero from database
   getHero(key: string): Observable<Hero> {
-    const heroDoc = this.heroesChapter.doc<Hero>(key);
-    return heroDoc.valueChanges().pipe(
-      take(1),
-      tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
-      catchError(this.handleError<Hero>(`getting hero w/ key=${key}`)));
+    if (this.heroesChapter) {
+      const heroDoc = this.heroesChapter.doc<Hero>(key);
+      return heroDoc.valueChanges().pipe(
+        take(1),
+        tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
+        catchError(this.handleError<Hero>(`getting hero w/ key=${key}`)));
+    } else {
+      return of();
+    }
   }
 
   // UPDATE: Update hero in the database with new value

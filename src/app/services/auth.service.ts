@@ -9,7 +9,8 @@ import {
 import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { User } from './user.model';
+import { User } from '../models/user.model';
+import { Campaign } from '../models/campaign.model';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ import { User } from './user.model';
 })
 export class AuthService {
   user$: Observable<User>;
+ 
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -35,6 +37,8 @@ export class AuthService {
     )
   }
 
+  ngOnInit() { }
+
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
@@ -51,7 +55,8 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName
+      displayName: user.displayName,
+      playerIn: user.playerIn.valueChanges(),
     }
     
     userRef.set(data, {merge: true})
