@@ -4,6 +4,8 @@ import { User } from '../services/user.model';
 import { Observable } from 'rxjs';
 import { Campaign } from '../services/campaign';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { SettingsService } from '../services/settings.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signin',
@@ -11,23 +13,21 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-  db: AngularFirestore;
   public user: User;
-  public campaignList: Observable<Campaign[]>;
-  private campaigns: AngularFirestoreCollection<Campaign>;
+  public campaign: Campaign;
 
   constructor(public authService: AuthService,
-              private firestore: AngularFirestore) { 
+              public settings: SettingsService) { 
   }
 
   ngOnInit(): void {
-    this.db = this.firestore;
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.campaigns = this.db.collection<Campaign>(`/campaigns`, 
-      ref => ref.where('dungeonMaster', '==', user.uid));
-      this.campaignList = this.campaigns.valueChanges();
     })
+  }
+
+  changeCampaign(campaign: Campaign): void {
+    this.settings.campaign$.next(this.campaign);
   }
 
 }

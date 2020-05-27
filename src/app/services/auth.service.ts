@@ -18,7 +18,7 @@ import { Campaign } from './campaign';
 })
 export class AuthService {
   user$: Observable<User>;
-  campaign: AngularFirestoreDocument<Campaign>;
+ 
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -35,7 +35,6 @@ export class AuthService {
         }
       })
     )
-    this.user$.subscribe(user => this.campaign = user.playerIn[0]);
   }
 
   ngOnInit() { }
@@ -57,7 +56,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      playerIn: user.playerIn,
+      playerIn: user.playerIn.valueChanges(),
     }
     
     userRef.set(data, {merge: true})

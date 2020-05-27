@@ -1,6 +1,6 @@
 export interface Campaign {
-    readonly id: string;
-    name: string;
+    readonly key: string;
+    title: string;
     dungeonMaster: string;
     players: string[];
 }

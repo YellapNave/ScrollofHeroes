@@ -12,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { SigninComponent } from './signin/signin.component';
+import { FirstwordPipe } from './pipes/firstword.pipe';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SigninComponent } from './signin/signin.component';
     DashboardComponent,
     HeroSearchComponent,
     SigninComponent,
+    FirstwordPipe,
     ],
   imports: [
     FormsModule,

@@ -5,7 +5,7 @@ export interface User {
     uid: string;
     email: string;
     displayName: string;
-    playerIn: AngularFirestoreDocument<Campaign[]>;
+    playerIn: AngularFirestoreDocument<Campaign>[];
     isAdmin?: boolean;
     characters?: string[];
 }

@@ -10,6 +10,7 @@ import {
   AngularFirestore
 } from '@angular/fire/firestore';
 import { Campaign } from './campaign';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +24,18 @@ export class HeroService {
   constructor(
     private messageService: MessageService,
     private firestore: AngularFirestore,
-    private authService: AuthService
+    private authService: AuthService,
+    private settings: SettingsService
     ) { 
       this.db = this.firestore;
-      this.authService.user$.subscribe(user => { 
-        console.log(user);
+      this.authService.user$.subscribe(user => {
         this.user = user;
-        this.campaign = user.playerIn[0]; 
-        this.heroesChapter = this.db.collection<Hero>('/heroes', 
-          ref => ref.where('campaign', '==', user.playerIn[0].id));
       });
+      this.settings.campaign$.subscribe(campaign => {
+        this.heroesChapter = 
+          this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
+          this.log(`Selected campaign: ${campaign.title}`);
+      })
     }
 
   ngOnInit() { 
