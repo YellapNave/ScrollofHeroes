@@ -40,14 +40,15 @@ ul.search-result {
   padding-left: 0;
 }
 
-h4 {
+h4, h3 {
+  font-weight: lighter;
   text-align: center;
 }
 
 input {
   background-color: black;
   color: white;
-  border: 2px solid #45A29E;
+  border: 1px solid #45A29E;
 }
 
 #search-box {
