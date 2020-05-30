@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { tap, take, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MessageService } from '../services/message.service';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-heroes',
@@ -16,8 +17,12 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
 
   constructor(private heroService: HeroService,
-              private router: Router,
-              public authService: AuthService) { }            
+    private router: Router,
+    private settings: SettingsService,
+    public authService: AuthService,
+    ) { 
+      this.settings.campaign$.subscribe(campaign => this.getHeroes());
+    }            
 
   ngOnInit(): void {
     this.getHeroes();
@@ -26,17 +31,16 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.authService.user$.subscribe(user => {
       this.heroService.getHeroes().subscribe(
-        heroes => this.heroes = heroes);
+        heroes => {
+          this.heroes = heroes;
+        });
       })
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    const id = this.heroes.length > 0 ? 
-      Math.max(...this.heroes.map(hero => hero.id)) + 1 :
-      1;
-    this.heroService.addHero({ id, name } as Hero).pipe(take(1))
+    this.heroService.addHero({ name } as Hero).pipe(take(1))
     .subscribe(newHero => this.router.navigate([`/detail/${newHero.key}`]));
   }
 

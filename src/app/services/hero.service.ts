@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
+import { catchError, tap, take } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
 import { Hero } from '../models/hero.model';
-import { catchError, flatMap, tap, take } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { 
   AngularFirestoreCollection, 
@@ -34,28 +34,35 @@ export class HeroService {
       this.settings.campaign$.subscribe(campaign => {
         this.heroesChapter = 
           this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
-          this.log(`Selected campaign: ${campaign.title}`);
+          this.log(`Fetched campaign: ${campaign.title}`);
       })
     }
 
-  ngOnInit() { 
-  }
+  ngOnInit() { }
 
   getHeroes(): Observable<Hero[]> {
-    return this.heroesChapter.valueChanges()
-    .pipe(
-      tap(_ => this.log(`fetched heroes`)),
-      catchError(this.handleError<Hero[]>(`fetching heroes`))
-    );
+    if (this.heroesChapter) {
+      return this.heroesChapter.valueChanges()
+      .pipe(
+        tap(_ => this.log(`fetched heroes`)),
+        catchError(this.handleError<Hero[]>(`fetching heroes`))
+      );
+    } else {
+      return of([]);
+    }
   }
 
   // READ: Pull down hero from database
   getHero(key: string): Observable<Hero> {
-    const heroDoc = this.heroesChapter.doc<Hero>(key);
-    return heroDoc.valueChanges().pipe(
-      take(1),
-      tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
-      catchError(this.handleError<Hero>(`getting hero w/ key=${key}`)));
+    if (this.heroesChapter) {
+      const heroDoc = this.heroesChapter.doc<Hero>(key);
+      return heroDoc.valueChanges().pipe(
+        take(1),
+        tap(hero => this.log(`fetched hero ${hero.name} (key=${key})`)),
+        catchError(this.handleError<Hero>(`getting hero w/ key=${key}`)));
+    } else {
+      return of();
+    }
   }
 
   // UPDATE: Update hero in the database with new value

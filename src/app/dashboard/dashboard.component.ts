@@ -3,6 +3,7 @@ import { Hero } from '../models/hero.model';
 import { HeroService } from '../services/hero.service';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,10 @@ export class DashboardComponent implements OnInit {
   public heroes: Hero[] = [];
 
   constructor(private heroService: HeroService,
-              public authService: AuthService) { }
+    private settings: SettingsService,
+    public authService: AuthService) { 
+      this.settings.campaign$.subscribe(campaign => this.getHeroes())
+    }
 
   ngOnInit(): void {
     this.getHeroes();

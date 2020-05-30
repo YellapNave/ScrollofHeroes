@@ -3,7 +3,7 @@
     <button class="button" (click)="authService.googleSignin()">Sign In</button>
 </ng-template>
 <div *ngIf="user; else login">
-    <h3>Currently logged in as: {{user.displayName}}</h3>
+    <h3>Currently logged in as: {{ user.displayName }}</h3>
     <div>
         <h4>Please select a campaign:</h4>
             <select name="campaign" 

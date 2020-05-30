@@ -40,6 +40,7 @@ export class SettingsService {
         }
       });
       this.campaignList = result;
+      this.campaign$.next(this.campaignList[0]);
     })
   }
 }
