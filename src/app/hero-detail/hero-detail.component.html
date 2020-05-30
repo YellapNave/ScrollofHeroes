@@ -1,9 +1,9 @@
 <div *ngIf="hero; else loading" class="container">
     <h2>{{hero.name | titlecase}} Details</h2>
     <div *ngIf="hero" class="row">
-        <div class="col-6">
+        <div class="col-md-6">
             <div class="row">
-                <div class="input-group mb-3">
+                <div class="col input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" 
                         id="name">Name</span>
@@ -18,7 +18,7 @@
                   </div>
             </div>
             <div class="row">
-                <div class="input-group mb-3">
+                <div class="col input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" 
                         id="player">Player</span>
@@ -33,7 +33,7 @@
                   </div>
             </div>
             <div class="row">
-                <div class="input-group mb-3">
+                <div class="col input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text"
                         for="ancestry">Ancestry</label>
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-group mb-3">
+                <div class="col input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text"
                         for="class">Class</label>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-group mb-3">
+                <div class="col input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" 
                         id="level">Level</span>
@@ -94,12 +94,8 @@
                         aria-describedby="Level">
                   </div>
             </div>
-            <div class="row">
-                <button (click)="goBack()">Back</button>
-                <button [disabled]="!userOwnsHero" (click)="save()">Save</button>
-            </div>
         </div>
-        <div class="notes col-6">
+        <div class="notes col-md-6">
             <div class="mb-4">
                 <textarea [disabled]="!userOwnsHero" 
                 [(ngModel)]="hero.notes" 
@@ -109,6 +105,12 @@
                 rows="8"></textarea>
             </div>
         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-6 d-flex justify-content-around align-items-start">
+			<button class="btn" (click)="goBack()">Back</button>
+			<button class="btn" [disabled]="!userOwnsHero" (click)="save()">Save</button>
+		</div>
     </div>
 </div>
 <ng-template #loading>
