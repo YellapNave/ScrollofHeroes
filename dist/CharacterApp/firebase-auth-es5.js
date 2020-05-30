@@ -21,9 +21,7 @@
     /* harmony import */
 
 
-    var _firebase_app__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(_firebase_app__WEBPACK_IMPORTED_MODULE_0__);
+    var _firebase_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_firebase_app__WEBPACK_IMPORTED_MODULE_0__);
 
     (function () {
       /*
@@ -269,7 +267,7 @@
           return C;
         };
 
-        b.prototype.catch = function (g) {
+        b.prototype["catch"] = function (g) {
           return this.then(void 0, g);
         };
 
@@ -4441,7 +4439,7 @@
       };
 
       function Wh(a) {
-        a.c.read().then(a.nc.bind(a)).catch(a.Sa.bind(a));
+        a.c.read().then(a.nc.bind(a))["catch"](a.Sa.bind(a));
       }
 
       k.nc = function (a) {
@@ -8424,7 +8422,7 @@
         }));
       };
 
-      k.delete = function () {
+      k["delete"] = function () {
         var a = this;
         return R(this, this.I().then(function (b) {
           return N(a.a, zj, {
@@ -8891,7 +8889,7 @@
         this.a = null;
         yn(this);
         this.INTERNAL = {};
-        this.INTERNAL["delete"] = r(this.delete, this);
+        this.INTERNAL["delete"] = r(this["delete"], this);
         this.INTERNAL.logFramework = r(this.Ec, this);
         this.s = 0;
         G.call(this);
@@ -9451,7 +9449,7 @@
         }));
       }
 
-      k.delete = function () {
+      k["delete"] = function () {
         this.l = !0;
 
         for (var a = 0; a < this.P.length; a++) {
@@ -9561,7 +9559,7 @@
       Ln.prototype.reset = function (a) {
         var b = On(this, a);
         a = Pn(a);
-        b && a && (b.delete(), delete this.a[a]);
+        b && a && (b["delete"](), delete this.a[a]);
       };
 
       Ln.prototype.getResponse = function (a) {
@@ -9621,7 +9619,7 @@
         }, 500));
       };
 
-      Nn.prototype.delete = function () {
+      Nn.prototype["delete"] = function () {
         Qn(this);
         this.g = !0;
         clearTimeout(this.a);
