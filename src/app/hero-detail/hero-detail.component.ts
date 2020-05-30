@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Hero } from '../services/hero';
+import { Hero } from '../models/hero.model';
 import { HeroService } from '../services/hero.service';
 import { take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { User } from '../services/user.model';
+import { User } from '../models/user.model';
 import { Observable, of } from 'rxjs';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-hero-detail',
@@ -16,17 +17,23 @@ import { Observable, of } from 'rxjs';
 
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
-  userOwnsHero: Boolean;
+  public userOwnsHero: Boolean;
+  private key: string;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
     private authService: AuthService,
-    private location: Location) { }
+    private location: Location,
+    private settings: SettingsService,
+    ) {
+      this.settings.campaign$.subscribe(campaign => this.getHero());
+     }
 
   ngOnInit(): void {
+    this.key = this.route.snapshot.paramMap.get('key')
     this.authService.user$.subscribe(user => this.userOwnsHero = 
-      user.characters.includes(this.hero.key) || user.isAdmin);
+      user.characters.includes(this.key) || user.isAdmin);
     this.getHero();
   }
 

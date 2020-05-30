@@ -1,4 +1,4 @@
-h3, a {
+h3, h4, a {
     text-align: center;
 }
 
@@ -37,4 +37,21 @@ button:visited, button:link {
 button:hover {
   color: #039be5;
   background-color: #cfd8dc;
+}
+
+label {
+  display: block;
+  width: 10%;
+  margin: .5em auto;
+}
+
+input, select, textarea {
+  display: block;
+  margin: auto;
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  background-color: black;
+  color: white;
+  border: 2px solid #45A29E;
 }
