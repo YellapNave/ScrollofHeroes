@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Hero } from '../services/hero';
+import { Hero } from '../models/hero.model';
 import { HeroService } from '../services/hero.service';
 import { take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { User } from '../services/user.model';
+import { User } from '../models/user.model';
 import { Observable, of } from 'rxjs';
 
 @Component({

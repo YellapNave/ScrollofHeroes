@@ -9,8 +9,8 @@ import {
 import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { User } from './user.model';
-import { Campaign } from './campaign';
+import { User } from '../models/user.model';
+import { Campaign } from '../models/campaign.model';
 
 
 @Injectable({

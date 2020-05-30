@@ -2,14 +2,14 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
-import { Hero } from './hero';
+import { Hero } from '../models/hero.model';
 import { catchError, flatMap, tap, take } from 'rxjs/operators';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 import { 
   AngularFirestoreCollection, 
   AngularFirestore
 } from '@angular/fire/firestore';
-import { Campaign } from './campaign';
+import { Campaign } from '../models/campaign.model';
 import { SettingsService } from './settings.service';
 
 @Injectable({

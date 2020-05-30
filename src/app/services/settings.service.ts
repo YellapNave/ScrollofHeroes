@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Campaign } from './campaign';
+import { Campaign } from '../models/campaign.model';
 import { Observable, Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { User } from '../services/user.model';
+import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
-import { Campaign } from '../services/campaign';
+import { Campaign } from '../models/campaign.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { SettingsService } from '../services/settings.service';
 import { take } from 'rxjs/operators';

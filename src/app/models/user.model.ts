@@ -1,4 +1,4 @@
-import { Campaign } from './campaign';
+import { Campaign } from './campaign.model';
 import { AngularFirestoreDocument } from '@angular/fire/firestore/public_api';
 
 export interface User {
