@@ -641,7 +641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       },
       directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _hero_search_hero_search_component__WEBPACK_IMPORTED_MODULE_5__["HeroSearchComponent"]],
-      styles: ["label[_ngcontent-%COMP%] {\n  margin: 1em 0;\n}\n\n.row[_ngcontent-%COMP%] {\n  margin: 1em 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGFzaGJvYXJkL0M6XFxVc2Vyc1xcd293Y2NcXFNjcm9sbG9mSGVyb2VzL3NyY1xcYXBwXFxkYXNoYm9hcmRcXGRhc2hib2FyZC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7QUNDRjs7QURFQTtFQUNFLGFBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2Rhc2hib2FyZC9kYXNoYm9hcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJsYWJlbCB7XHJcbiAgbWFyZ2luOiAxZW0gMDtcclxufVxyXG5cclxuLnJvdyB7XHJcbiAgbWFyZ2luOiAxZW0gMDtcclxufSIsImxhYmVsIHtcbiAgbWFyZ2luOiAxZW0gMDtcbn1cblxuLnJvdyB7XG4gIG1hcmdpbjogMWVtIDA7XG59Il19 */"]
+      styles: ["label[_ngcontent-%COMP%], h3[_ngcontent-%COMP%], h4[_ngcontent-%COMP%] {\n  text-align: center;\n}\n\n.row[_ngcontent-%COMP%] {\n  margin: 1em 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGFzaGJvYXJkL0M6XFxVc2Vyc1xcd293Y2NcXFNjcm9sbG9mSGVyb2VzL3NyY1xcYXBwXFxkYXNoYm9hcmRcXGRhc2hib2FyZC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxhQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibGFiZWwsIGgzLCBoNCB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4ucm93IHtcclxuICBtYXJnaW46IDFlbSAwO1xyXG59IiwibGFiZWwsIGgzLCBoNCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLnJvdyB7XG4gIG1hcmdpbjogMWVtIDA7XG59Il19 */"]
     });
     /*@__PURE__*/
 
@@ -2193,7 +2193,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
-            playerIn: user.playerIn.valueChanges()
+            playerIn: user.playerIn.valueChanges() ? user.playerIn.valueChanges() : []
           };
           userRef.set(data, {
             merge: true
@@ -2630,7 +2630,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
             _this21.campaignList = result;
 
-            _this21.campaign$.next(_this21.campaignList[0]);
+            if (_this21.campaignList) {
+              _this21.campaign$.next(_this21.campaignList[0]);
+            }
           });
         }
       }]);

@@ -56,7 +56,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      playerIn: user.playerIn.valueChanges(),
+      playerIn: user.playerIn.valueChanges() ? user.playerIn.valueChanges() : [],
     }
     
     userRef.set(data, {merge: true})
