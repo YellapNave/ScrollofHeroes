@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Hero } from '../models/hero.model';
+import { Hero } from '../models/pf2hero.model';
 import { HeroService } from '../services/hero.service';
 import { take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';

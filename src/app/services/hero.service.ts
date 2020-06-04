@@ -3,7 +3,7 @@ import { Observable, of, from } from 'rxjs';
 import { catchError, tap, take } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
-import { Hero } from '../models/hero.model';
+import { Hero } from '../models/pf2hero.model';
 import { User } from '../models/user.model';
 import { 
   AngularFirestoreCollection, 
@@ -32,9 +32,11 @@ export class HeroService {
         this.user = user;
       });
       this.settings.campaign$.subscribe(campaign => {
-        this.heroesChapter = 
-          this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
-          this.log(`Fetched campaign: ${campaign.title}`);
+        if (campaign.key !== "") {
+          this.heroesChapter = 
+            this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
+            this.log(`Fetched campaign: ${campaign.title}`);
+        }
       })
     }
 

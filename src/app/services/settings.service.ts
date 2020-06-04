@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Campaign } from '../models/campaign.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
@@ -13,7 +13,7 @@ export class SettingsService {
   private db: AngularFirestore;
 
   // campaign stuff
-  public campaign$: Subject<Campaign>;
+  public campaign$: BehaviorSubject<Campaign>;
   public campaignList: Campaign[];
   private campaigns: Observable<Campaign[]>;
   private user: User;
@@ -22,7 +22,7 @@ export class SettingsService {
     private firestore: AngularFirestore,
     private authService: AuthService) {
       this.db = this.firestore;
-      this.campaign$ = new Subject<Campaign>();
+      this.campaign$ = new BehaviorSubject<Campaign>({key: ""});
       this.authService.user$.subscribe(user => {
         this.user = user;
         this.setCampaigns();
@@ -41,7 +41,7 @@ export class SettingsService {
       });
       this.campaignList = result;
       if (this.campaignList) {
-        this.campaign$.next(this.campaignList[0]);
+       this.campaign$.next(this.campaignList[0]);
       }
     })
   }

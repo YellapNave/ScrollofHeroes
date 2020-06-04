@@ -62,7 +62,7 @@ export class AuthService {
     userRef.set(data, {merge: true})
       .then(prom => {this.log(`signed in as: ${user.displayName}`); return prom;})
       .catch(this.handleError<any>(`signing in as ${user.displayName}`));
-    this.router.navigate(["/signin"]);
+    this.router.navigate(["/account"]);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

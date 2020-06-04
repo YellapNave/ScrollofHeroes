@@ -8,6 +8,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SigninComponent } from './signin/signin.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const redirectUnauthorizedToSignin = () => redirectUnauthorizedTo(['signin']);
 
@@ -18,8 +19,8 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToSignin)},
   { path: 'detail/:key', component: HeroDetailComponent, 
     ...canActivate(redirectUnauthorizedToSignin)},
-  { path: 'signin', component: SigninComponent},
-  { path: '', redirectTo: '/signin', pathMatch: 'full'}
+  { path: 'account', component: SettingsComponent},
+  { path: '', redirectTo: '/account', pathMatch: 'full'}
 ];
 
 @NgModule({

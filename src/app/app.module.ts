@@ -14,7 +14,8 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { SigninComponent } from './signin/signin.component';
 import { FirstwordPipe } from './pipes/firstword.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip'
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SettingsComponent } from './settings/settings.component'
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
     HeroSearchComponent,
     SigninComponent,
     FirstwordPipe,
+    SettingsComponent,
     ],
   imports: [
     FormsModule,
