@@ -55,8 +55,7 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      playerIn: user.playerIn.valueChanges() ? user.playerIn.valueChanges() : [],
+      displayName: user.displayName
     }
     
     userRef.set(data, {merge: true})
