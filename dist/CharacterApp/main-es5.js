@@ -195,19 +195,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _services_settings_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./services/settings.service */
+    "./src/app/services/settings.service.ts");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
     /* harmony import */
 
 
-    var _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./messages/messages.component */
     "./src/app/messages/messages.component.ts");
 
@@ -253,20 +259,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var user_r50 = ctx.ngIf;
+        var ctx_r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", user_r50.isAdmin);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r52.settings.showMessages);
       }
     }
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(heroService, authService) {
+      function AppComponent(heroService, authService, settings) {
         _classCallCheck(this, AppComponent);
 
         this.heroService = heroService;
         this.authService = authService;
+        this.settings = settings;
         this.title = 'Scroll of Heroes';
       }
 
@@ -281,7 +288,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AppComponent.ɵfac = function AppComponent_Factory(t) {
-      return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_hero_service__WEBPACK_IMPORTED_MODULE_1__["HeroService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]));
+      return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_hero_service__WEBPACK_IMPORTED_MODULE_1__["HeroService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_settings_service__WEBPACK_IMPORTED_MODULE_3__["SettingsService"]));
     };
 
     AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -323,8 +330,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](6, 5, ctx.authService.user$));
         }
       },
-      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterOutlet"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLinkWithHref"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__["MessagesComponent"]],
-      pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["AsyncPipe"]],
+      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterOutlet"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterLinkWithHref"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__["MessagesComponent"]],
+      pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"]],
       styles: ["h1[_ngcontent-%COMP%] {\n  font-size: 1.2em;\n  margin-bottom: 0;\n  text-align: center;\n}\nh2[_ngcontent-%COMP%] {\n  font-size: 2em;\n  margin-top: 0;\n  padding-top: 0;\n  text-align: center;\n}\nnav[_ngcontent-%COMP%] {\n  text-align: center;\n  margin-bottom: 1em;\n}\nnav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], button[_ngcontent-%COMP%] {\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  margin-right: 10px;\n  display: inline-block;\n  background-color: #181818;\n  color: #C5C6C7;\n  border-radius: 4px;\n  border: 1px solid #45A29E;\n}\nnav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:visited, a[_ngcontent-%COMP%]:link, button[_ngcontent-%COMP%]:visited, button[_ngcontent-%COMP%]:link {\n  color: white;\n}\nnav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover, nav[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover {\n  color: #039be5;\n  background-color: #cfd8dc;\n}\nnav[_ngcontent-%COMP%]   a.active[_ngcontent-%COMP%] {\n  color: #039be5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFx3b3djY1xcU2Nyb2xsb2ZIZXJvZXMvc3JjXFxhcHBcXGFwcC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHNDQUFBO0FBQ0E7RUFDRSxnQkFBQTtFQUNBLGdCQUFBO0VBQ0Esa0JBQUE7QUNDRjtBRENBO0VBQ0UsY0FBQTtFQUNBLGFBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7QUNFRjtBREFBO0VBQ0Usa0JBQUE7RUFDQSxrQkFBQTtBQ0dGO0FEREE7RUFDRSxpQkFBQTtFQUNBLHFCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLHFCQUFBO0VBQ0EseUJBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7RUFDQSx5QkFBQTtBQ0lGO0FERkE7RUFDRSxZQUFBO0FDS0Y7QURIQTtFQUNFLGNBQUE7RUFDQSx5QkFBQTtBQ01GO0FESkE7RUFDRSxjQUFBO0FDT0YiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBBcHBDb21wb25lbnQncyBwcml2YXRlIENTUyBzdHlsZXMgKi9cclxuaDEge1xyXG4gIGZvbnQtc2l6ZTogMS4yZW07XHJcbiAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuaDIge1xyXG4gIGZvbnQtc2l6ZTogMmVtO1xyXG4gIG1hcmdpbi10b3A6IDA7XHJcbiAgcGFkZGluZy10b3A6IDA7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcbm5hdiB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIG1hcmdpbi1ib3R0b206IDFlbTtcclxufVxyXG5uYXYgYSwgYnV0dG9uIHtcclxuICBwYWRkaW5nOiA1cHggMTBweDtcclxuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgbWFyZ2luLXRvcDogMTBweDtcclxuICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxODE4MTg7IFxyXG4gIGNvbG9yOiAjQzVDNkM3O1xyXG4gIGJvcmRlci1yYWRpdXM6IDRweDtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjNDVBMjlFO1xyXG59XHJcbm5hdiBhOnZpc2l0ZWQsIGE6bGluaywgYnV0dG9uOnZpc2l0ZWQsIGJ1dHRvbjpsaW5rIHtcclxuICBjb2xvcjogd2hpdGU7XHJcbn1cclxubmF2IGE6aG92ZXIsIG5hdiBidXR0b246aG92ZXIge1xyXG4gIGNvbG9yOiAjMDM5YmU1O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNjZmQ4ZGM7XHJcbn1cclxubmF2IGEuYWN0aXZlIHtcclxuICBjb2xvcjogIzAzOWJlNTtcclxufSIsIi8qIEFwcENvbXBvbmVudCdzIHByaXZhdGUgQ1NTIHN0eWxlcyAqL1xuaDEge1xuICBmb250LXNpemU6IDEuMmVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbmgyIHtcbiAgZm9udC1zaXplOiAyZW07XG4gIG1hcmdpbi10b3A6IDA7XG4gIHBhZGRpbmctdG9wOiAwO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbm5hdiB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgbWFyZ2luLWJvdHRvbTogMWVtO1xufVxuXG5uYXYgYSwgYnV0dG9uIHtcbiAgcGFkZGluZzogNXB4IDEwcHg7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgbWFyZ2luLXRvcDogMTBweDtcbiAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxODE4MTg7XG4gIGNvbG9yOiAjQzVDNkM3O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJvcmRlcjogMXB4IHNvbGlkICM0NUEyOUU7XG59XG5cbm5hdiBhOnZpc2l0ZWQsIGE6bGluaywgYnV0dG9uOnZpc2l0ZWQsIGJ1dHRvbjpsaW5rIHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG5uYXYgYTpob3ZlciwgbmF2IGJ1dHRvbjpob3ZlciB7XG4gIGNvbG9yOiAjMDM5YmU1O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2ZkOGRjO1xufVxuXG5uYXYgYS5hY3RpdmUge1xuICBjb2xvcjogIzAzOWJlNTtcbn0iXX0= */"]
     });
     /*@__PURE__*/
@@ -342,6 +349,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _services_hero_service__WEBPACK_IMPORTED_MODULE_1__["HeroService"]
         }, {
           type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+        }, {
+          type: _services_settings_service__WEBPACK_IMPORTED_MODULE_3__["SettingsService"]
         }];
       }, null);
     })();
@@ -606,9 +615,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(DashboardComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {
-          this.getHeroes();
-        }
+        value: function ngOnInit() {}
       }, {
         key: "getHeroes",
         value: function getHeroes() {
@@ -1163,27 +1170,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.settings.campaign$.subscribe(function (campaign) {
           return _this3.getHero();
         });
+        this.authService.user$.subscribe(function (user) {
+          return _this3.userOwnsHero = user.characters.includes(_this3.key) || user.isAdmin;
+        });
       }
 
       _createClass(HeroDetailComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this4 = this;
-
           this.key = this.route.snapshot.paramMap.get('key');
-          this.authService.user$.subscribe(function (user) {
-            return _this4.userOwnsHero = user.characters.includes(_this4.key) || user.isAdmin;
-          });
-          this.getHero();
         }
       }, {
         key: "getHero",
         value: function getHero() {
-          var _this5 = this;
+          var _this4 = this;
 
           var key = this.route.snapshot.paramMap.get('key');
           this.heroService.getHero(key).subscribe(function (hero) {
-            return _this5.hero = Object.assign({
+            return _this4.hero = Object.assign({
               key: key
             }, hero);
           });
@@ -1196,10 +1200,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "save",
         value: function save() {
-          var _this6 = this;
+          var _this5 = this;
 
           this.heroService.updateHero(this.hero.key, this.hero).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["take"])(1)).subscribe(function (hero) {
-            return _this6.goBack();
+            return _this5.goBack();
           });
         }
       }]);
@@ -1339,15 +1343,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var hero_r59 = ctx.$implicit;
+        var hero_r63 = ctx.$implicit;
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("routerLink", "/detail/", hero_r59.key, "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("routerLink", "/detail/", hero_r63.key, "");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", hero_r59.name, " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", hero_r63.name, " ");
       }
     }
 
@@ -1368,13 +1372,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this7 = this;
+          var _this6 = this;
 
           this.heroes$ = this.searchTerms.pipe( // wait 300ms after each keystroke before consdering the term
           Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(300), // ignore new term if same as previous term
           Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["distinctUntilChanged"])(), // switch to new search observable each time the term changes
           Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (term) {
-            return _this7.heroService.searchHeroes(term);
+            return _this6.heroService.searchHeroes(term);
           }));
         }
       }]);
@@ -1394,7 +1398,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       consts: [["id", "search-component"], ["for", "search-box"], ["id", "search-box", 3, "input"], ["searchBox", ""], [1, "search-result"], [4, "ngFor", "ngForOf"], [3, "routerLink"]],
       template: function HeroSearchComponent_Template(rf, ctx) {
         if (rf & 1) {
-          var _r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r64 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
 
@@ -1411,11 +1415,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "input", 2, 3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("input", function HeroSearchComponent_Template_input_input_4_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r60);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r64);
 
-            var _r57 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](5);
+            var _r61 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](5);
 
-            return ctx.search(_r57.value);
+            return ctx.search(_r61.value);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1710,7 +1714,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var HeroesComponent = /*#__PURE__*/function () {
       function HeroesComponent(heroService, router, settings, authService) {
-        var _this8 = this;
+        var _this7 = this;
 
         _classCallCheck(this, HeroesComponent);
 
@@ -1720,30 +1724,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.authService = authService;
         this.heroes = [];
         this.settings.campaign$.subscribe(function (campaign) {
-          return _this8.getHeroes();
+          return _this7.getHeroes();
         });
       }
 
       _createClass(HeroesComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {
-          this.getHeroes();
-        }
+        value: function ngOnInit() {}
       }, {
         key: "getHeroes",
         value: function getHeroes() {
-          var _this9 = this;
+          var _this8 = this;
 
           this.authService.user$.subscribe(function (user) {
-            _this9.heroService.getHeroes().subscribe(function (heroes) {
-              _this9.heroes = heroes;
+            _this8.heroService.getHeroes().subscribe(function (heroes) {
+              _this8.heroes = heroes;
             });
           });
         }
       }, {
         key: "add",
         value: function add(name) {
-          var _this10 = this;
+          var _this9 = this;
 
           name = name.trim();
 
@@ -1754,7 +1756,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.heroService.addHero({
             name: name
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["take"])(1)).subscribe(function (newHero) {
-            return _this10.router.navigate(["/detail/".concat(newHero.key)]);
+            return _this9.router.navigate(["/detail/".concat(newHero.key)]);
           });
         }
       }, {
@@ -1871,17 +1873,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var message_r54 = ctx.$implicit;
+        var message_r58 = ctx.$implicit;
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](message_r54);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](message_r58);
       }
     }
 
     function MessagesComponent_div_0_Template(rf, ctx) {
       if (rf & 1) {
-        var _r56 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -1894,11 +1896,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 1);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function MessagesComponent_div_0_Template_button_click_3_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r56);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r60);
 
-          var ctx_r55 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r59 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r55.messageService.clear();
+          return ctx_r59.messageService.clear();
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Clear");
@@ -1911,11 +1913,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var ctx_r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+        var ctx_r56 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r52.messageService.messages);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r56.messageService.messages);
       }
     }
 
@@ -2125,7 +2127,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var AuthService = /*#__PURE__*/function () {
       function AuthService(afAuth, db, router, messageService) {
-        var _this11 = this;
+        var _this10 = this;
 
         _classCallCheck(this, AuthService);
 
@@ -2135,7 +2137,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.messageService = messageService;
         this.user$ = this.afAuth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (user) {
           if (user) {
-            return _this11.db.doc("/users/".concat(user.uid)).valueChanges();
+            return _this10.db.doc("/users/".concat(user.uid)).valueChanges();
           } else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(null);
           }
@@ -2192,7 +2194,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "updateUserData",
         value: function updateUserData(user) {
-          var _this12 = this;
+          var _this11 = this;
 
           var userRef = this.db.doc("/users/".concat(user.uid));
           var data = {
@@ -2204,7 +2206,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           userRef.set(data, {
             merge: true
           }).then(function (prom) {
-            _this12.log("signed in as: ".concat(user.displayName));
+            _this11.log("signed in as: ".concat(user.displayName));
 
             return prom;
           })["catch"](this.handleError("signing in as ".concat(user.displayName)));
@@ -2213,7 +2215,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "handleError",
         value: function handleError() {
-          var _this13 = this;
+          var _this12 = this;
 
           var operation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'operation';
           var result = arguments.length > 1 ? arguments[1] : undefined;
@@ -2222,7 +2224,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.error(error); // log to console instead for now
             // TODO: better job of transforming error for user consumption
 
-            _this13.log("".concat(operation, " failed: ").concat(error.message)); // Let the app keep running by returning an empty result.
+            _this12.log("".concat(operation, " failed: ").concat(error.message)); // Let the app keep running by returning an empty result.
 
 
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(result);
@@ -2335,7 +2337,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var HeroService = /*#__PURE__*/function () {
       function HeroService(messageService, firestore, authService, settings) {
-        var _this14 = this;
+        var _this13 = this;
 
         _classCallCheck(this, HeroService);
 
@@ -2345,13 +2347,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.settings = settings;
         this.db = this.firestore;
         this.authService.user$.subscribe(function (user) {
-          _this14.user = user;
+          _this13.user = user;
         });
         this.settings.campaign$.subscribe(function (campaign) {
           if (campaign.key !== "") {
-            _this14.heroesChapter = _this14.db.collection("/campaigns/".concat(campaign.key, "/heroes"));
+            _this13.heroesChapter = _this13.db.collection("/campaigns/".concat(campaign.key, "/heroes"));
 
-            _this14.log("Fetched campaign: ".concat(campaign.title));
+            _this13.log("fetched campaign: ".concat(campaign.title));
           }
         });
       }
@@ -2362,11 +2364,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getHeroes",
         value: function getHeroes() {
-          var _this15 = this;
+          var _this14 = this;
 
           if (this.heroesChapter) {
             return this.heroesChapter.valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (_) {
-              return _this15.log("fetched heroes");
+              return _this14.log("fetched heroes");
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError("fetching heroes")));
           } else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([]);
@@ -2376,12 +2378,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getHero",
         value: function getHero(key) {
-          var _this16 = this;
+          var _this15 = this;
 
           if (this.heroesChapter) {
             var heroDoc = this.heroesChapter.doc(key);
             return heroDoc.valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (hero) {
-              return _this16.log("fetched hero ".concat(hero.name, " (key=").concat(key, ")"));
+              return _this15.log("fetched hero ".concat(hero.name, " (key=").concat(key, ")"));
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError("getting hero w/ key=".concat(key))));
           } else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])();
@@ -2391,10 +2393,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "updateHero",
         value: function updateHero(key, value) {
-          var _this17 = this;
+          var _this16 = this;
 
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.heroesChapter.doc(key).update(value)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (_) {
-            return _this17.log("updated hero ".concat(value.name, " (key: ").concat(key, ")"));
+            return _this16.log("updated hero ".concat(value.name, " (key: ").concat(key, ")"));
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError("updating hero ".concat(value.name, " (key: ").concat(key, ")"))));
         } // CREATE: Add new hero to database
 
@@ -2411,10 +2413,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deleteHero",
         value: function deleteHero(key) {
-          var _this18 = this;
+          var _this17 = this;
 
           return this.heroesChapter.doc(key)["delete"]().then(function (_) {
-            _this18.log("deleted hero w/ key: ".concat(key));
+            _this17.log("deleted hero w/ key: ".concat(key));
           })["catch"](this.handleError("deleting hero w/ key: ".concat(key)));
         } // GET: Get hero whose name contains search term
 
@@ -2433,7 +2435,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "handleError",
         value: function handleError() {
-          var _this19 = this;
+          var _this18 = this;
 
           var operation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'operation';
           var result = arguments.length > 1 ? arguments[1] : undefined;
@@ -2442,7 +2444,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.error(error); // log to console instead for now
             // TODO: better job of transforming error for user consumption
 
-            _this19.log("".concat(operation, " failed: ").concat(error.message)); // Let the app keep running by returning an empty result.
+            _this18.log("".concat(operation, " failed: ").concat(error.message)); // Let the app keep running by returning an empty result.
 
 
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(result);
@@ -2527,7 +2529,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(MessageService, [{
         key: "add",
         value: function add(message) {
-          this.messages.push("".concat(message, " ").concat(this.messages.length));
+          this.date = new Date();
+          var options = {
+            timeZoneName: 'short',
+            hour: '2-digit',
+            hour12: false,
+            minute: '2-digit',
+            second: '2-digit'
+          };
+          this.messages.push("[".concat(this.date.toLocaleTimeString('en-US', options), "] ").concat(message));
         }
       }, {
         key: "clear",
@@ -2608,40 +2618,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var SettingsService = /*#__PURE__*/function () {
       function SettingsService(firestore, authService) {
-        var _this20 = this;
+        var _this19 = this;
 
         _classCallCheck(this, SettingsService);
 
         this.firestore = firestore;
         this.authService = authService;
+        this.showMessages = false;
         this.db = this.firestore;
         this.campaign$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]({
           key: ""
         });
+        ;
         this.authService.user$.subscribe(function (user) {
-          _this20.user = user;
+          _this19.user = user;
 
-          _this20.setCampaigns();
+          _this19.setCampaigns();
         });
       }
 
       _createClass(SettingsService, [{
         key: "setCampaigns",
         value: function setCampaigns() {
-          var _this21 = this;
+          var _this20 = this;
 
           this.campaigns = this.db.collection("/campaigns").valueChanges();
           this.campaigns.subscribe(function (campaigns) {
             var result = [];
             campaigns.forEach(function (campaign) {
-              if (campaign.players.includes(_this21.user.uid) || campaign.dungeonMaster == _this21.user.uid) {
+              if (campaign.players.includes(_this20.user.uid) || campaign.dungeonMaster == _this20.user.uid) {
                 result.push(campaign);
               }
             });
-            _this21.campaignList = result;
+            _this20.campaignList = result;
 
-            if (_this21.campaignList) {
-              _this21.campaign$.next(_this21.campaignList[0]);
+            if (_this20.campaignList) {
+              _this20.campaign$.next(_this20.campaignList[0]);
             }
           });
         }
@@ -2719,25 +2731,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _signin_signin_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _services_message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../services/message.service */
+    "./src/app/services/message.service.ts");
+    /* harmony import */
+
+
+    var _signin_signin_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../signin/signin.component */
     "./src/app/signin/signin.component.ts");
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
     /* harmony import */
 
 
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
     function SettingsComponent_div_6_option_6_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 11);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -2745,25 +2763,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var cam_r43 = ctx.$implicit;
+        var cam_r44 = ctx.$implicit;
 
-        var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+        var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngValue", cam_r43)("selected", cam_r43.key == ctx_r42.campaign.key);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngValue", cam_r44)("selected", cam_r44.key == ctx_r43.campaign.key);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", cam_r43.title, " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", cam_r44.title, " ");
       }
     }
 
     function SettingsComponent_div_6_Template(rf, ctx) {
       if (rf & 1) {
-        var _r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h3");
 
@@ -2773,25 +2791,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 8);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "select", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "select", 9);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function SettingsComponent_div_6_Template_select_ngModelChange_5_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r46);
 
-          var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r44.campaign = $event;
+          return ctx_r45.campaign = $event;
         })("ngModelChange", function SettingsComponent_div_6_Template_select_ngModelChange_5_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r46);
 
-          var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r46.changeCampaign(ctx_r46.campaign);
+          return ctx_r47.changeCampaign(ctx_r47.campaign);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, SettingsComponent_div_6_option_6_Template, 2, 3, "option", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, SettingsComponent_div_6_option_6_Template, 2, 3, "option", 10);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2813,7 +2831,77 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }
 
-    function SettingsComponent_ng_template_7_Template(rf, ctx) {
+    function SettingsComponent_div_7_Template(rf, ctx) {
+      if (rf & 1) {
+        var _r49 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h3");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Messages:");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 8);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "select", 12);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function SettingsComponent_div_7_Template_select_ngModelChange_5_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
+
+          var ctx_r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r48.showMessages = $event;
+        })("ngModelChange", function SettingsComponent_div_7_Template_select_ngModelChange_5_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
+
+          var ctx_r50 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r50.updateSettings("showMessages");
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "option", 11);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, " Show ");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "option", 11);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Hide ");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      }
+
+      if (rf & 2) {
+        var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r40.showMessages);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngValue", true)("selected", ctx_r40.showMessages == true);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngValue", false)("selected", ctx_r40.showMessages == false);
+      }
+    }
+
+    function SettingsComponent_ng_template_8_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h3");
 
@@ -2824,18 +2912,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     var SettingsComponent = /*#__PURE__*/function () {
-      function SettingsComponent(settings, authService) {
-        var _this22 = this;
+      function SettingsComponent(settings, authService, messageService) {
+        var _this21 = this;
 
         _classCallCheck(this, SettingsComponent);
 
         this.settings = settings;
         this.authService = authService;
+        this.messageService = messageService;
+        this.adminSettings = false;
+        this.showMessages = false;
         this.settings.campaign$.subscribe(function (campaign) {
-          return _this22.campaign = campaign;
+          return _this21.campaign = campaign;
         });
         this.authService.user$.subscribe(function (user) {
-          return _this22.user = user;
+          _this21.user = user;
+          _this21.adminSettings = user.isAdmin ? true : false;
         });
       }
 
@@ -2847,21 +2939,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function changeCampaign(campaign) {
           this.settings.campaign$.next(campaign);
         }
+      }, {
+        key: "updateSettings",
+        value: function updateSettings(setting) {
+          eval("this.settings.".concat(setting, " = this.").concat(setting));
+          this.messageService.add("SettingsService: setting ".concat(setting, " changed to ").concat(eval("this.".concat(setting))));
+        }
       }]);
 
       return SettingsComponent;
     }();
 
     SettingsComponent.ɵfac = function SettingsComponent_Factory(t) {
-      return new (t || SettingsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_settings_service__WEBPACK_IMPORTED_MODULE_1__["SettingsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]));
+      return new (t || SettingsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_settings_service__WEBPACK_IMPORTED_MODULE_1__["SettingsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]));
     };
 
     SettingsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: SettingsComponent,
       selectors: [["app-settings"]],
-      decls: 9,
-      vars: 2,
-      consts: [[1, "container"], [1, "row"], [1, "col-md-12"], ["class", "row justify-content-end", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "row", "justify-content-end"], [1, "col-md-6"], [1, "col-md-5"], ["name", "campaign", 3, "ngModel", "ngModelChange"], [3, "ngValue", "selected", 4, "ngFor", "ngForOf"], [3, "ngValue", "selected"]],
+      decls: 10,
+      vars: 3,
+      consts: [[1, "container"], [1, "row"], [1, "col-md-12"], ["class", "row justify-content-end", 4, "ngIf", "ngIfElse"], ["class", "row justify-content-end", 4, "ngIf"], ["loading", ""], [1, "row", "justify-content-end"], [1, "col-md-6"], [1, "col-md-5"], ["name", "campaign", 3, "ngModel", "ngModelChange"], [3, "ngValue", "selected", 4, "ngFor", "ngForOf"], [3, "ngValue", "selected"], ["name", "messages", 3, "ngModel", "ngModelChange"]],
       template: function SettingsComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-signin");
@@ -2884,20 +2982,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, SettingsComponent_div_6_Template, 7, 2, "div", 3);
 
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, SettingsComponent_div_7_Template, 10, 5, "div", 4);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, SettingsComponent_ng_template_7_Template, 2, 0, "ng-template", null, 4, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, SettingsComponent_ng_template_8_Template, 2, 0, "ng-template", null, 5, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
         }
 
         if (rf & 2) {
-          var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](8);
+          var _r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](9);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.campaign)("ngIfElse", _r40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.campaign)("ngIfElse", _r41);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.adminSettings);
         }
       },
-      directives: [_signin_signin_component__WEBPACK_IMPORTED_MODULE_3__["SigninComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ɵangular_packages_forms_forms_x"]],
+      directives: [_signin_signin_component__WEBPACK_IMPORTED_MODULE_4__["SigninComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ɵangular_packages_forms_forms_x"]],
       styles: [".container[_ngcontent-%COMP%] {\n  background-color: rgba(0, 0, 0, 0.5);\n  border-radius: 12px;\n  padding: 1em;\n  margin-top: 1em;\n}\n\n.row[_ngcontent-%COMP%] {\n  background-color: rgba(0, 0, 0, 0.9);\n  border-radius: 12px;\n  margin: 1em;\n  padding: 1em;\n}\n\nh2[_ngcontent-%COMP%] {\n  text-align: center;\n  font-weight: lighter;\n}\n\nh3[_ngcontent-%COMP%], h4[_ngcontent-%COMP%], a[_ngcontent-%COMP%] {\n  font-weight: lighter;\n  margin: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  display: block;\n  margin: auto;\n  background-color: #eee;\n  border: none;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-family: Arial;\n}\n\nbutton[_ngcontent-%COMP%]:hover {\n  background-color: #cfd8dc;\n}\n\nbutton[_ngcontent-%COMP%] {\n  display: block;\n  margin: auto;\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  background-color: #181818;\n  color: white;\n  border-radius: 4px;\n  border: 1px solid #45A29E;\n  cursor: pointer;\n  cursor: hand;\n}\n\nbutton[_ngcontent-%COMP%]:visited, button[_ngcontent-%COMP%]:link {\n  color: white;\n}\n\nbutton[_ngcontent-%COMP%]:hover {\n  color: #039be5;\n  background-color: #cfd8dc;\n}\n\nlabel[_ngcontent-%COMP%] {\n  display: block;\n  width: 10%;\n  margin: 0.5em auto;\n}\n\ninput[_ngcontent-%COMP%], select[_ngcontent-%COMP%], textarea[_ngcontent-%COMP%] {\n  display: block;\n  height: 2em;\n  font-size: 1em;\n  padding-left: 0.4em;\n  background-color: black;\n  color: white;\n  border: 1px solid #45A29E;\n  border-radius: 0.25rem;\n  width: 60%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2V0dGluZ3MvQzpcXFVzZXJzXFx3b3djY1xcU2Nyb2xsb2ZIZXJvZXMvc3JjXFxhcHBcXHNldHRpbmdzXFxzZXR0aW5ncy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2V0dGluZ3Mvc2V0dGluZ3MuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQyxvQ0FBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7QUNDRDs7QURFQTtFQUNDLG9DQUFBO0VBQ0EsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtBQ0NEOztBREVBO0VBQ0Msa0JBQUE7RUFDQSxvQkFBQTtBQ0NEOztBREVBO0VBQ0Msb0JBQUE7RUFDQSxTQUFBO0FDQ0Q7O0FERUE7RUFDRSxjQUFBO0VBQ0EsWUFBQTtFQUNBLHNCQUFBO0VBQ0EsWUFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UseUJBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7RUFDQSxxQkFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSx5QkFBQTtFQUNBLGVBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxjQUFBO0VBQ0EseUJBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSxVQUFBO0VBQ0Esa0JBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSxXQUFBO0VBQ0EsY0FBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxZQUFBO0VBQ0QseUJBQUE7RUFDQSxzQkFBQTtFQUNBLFVBQUE7QUNDRCIsImZpbGUiOiJzcmMvYXBwL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XHJcblx0YmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjUpO1xyXG5cdGJvcmRlci1yYWRpdXM6IDEycHg7XHJcblx0cGFkZGluZzogMWVtO1xyXG5cdG1hcmdpbi10b3A6IDFlbTtcclxufVxyXG5cclxuLnJvdyB7XHJcblx0YmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjkpO1xyXG5cdGJvcmRlci1yYWRpdXM6IDEycHg7XHJcblx0bWFyZ2luOiAxZW07XHJcblx0cGFkZGluZzogMWVtO1xyXG59XHJcblxyXG5oMiB7XHJcblx0dGV4dC1hbGlnbjogY2VudGVyO1xyXG5cdGZvbnQtd2VpZ2h0OiBsaWdodGVyO1xyXG59XHJcblxyXG5oMywgaDQsIGEge1xyXG5cdGZvbnQtd2VpZ2h0OiBsaWdodGVyO1xyXG5cdG1hcmdpbjogMDtcclxufVxyXG5cclxuYnV0dG9uIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBtYXJnaW46IGF1dG87XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcclxuICBib3JkZXI6IG5vbmU7XHJcbiAgcGFkZGluZzogNXB4IDEwcHg7XHJcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xyXG4gIGZvbnQtZmFtaWx5OiBBcmlhbDtcclxufVxyXG4gIFxyXG5idXR0b246aG92ZXIge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNjZmQ4ZGM7XHJcbn1cclxuXHJcbmJ1dHRvbiB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG4gIHBhZGRpbmc6IDVweCAxMHB4O1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICBtYXJnaW4tdG9wOiAxMHB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxODE4MTg7IFxyXG4gIGNvbG9yOiB3aGl0ZTtcclxuICBib3JkZXItcmFkaXVzOiA0cHg7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgIzQ1QTI5RTtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgY3Vyc29yOiBoYW5kO1xyXG59XHJcblxyXG5idXR0b246dmlzaXRlZCwgYnV0dG9uOmxpbmsge1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxuYnV0dG9uOmhvdmVyIHtcclxuICBjb2xvcjogIzAzOWJlNTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2ZkOGRjO1xyXG59XHJcblxyXG5sYWJlbCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgd2lkdGg6IDEwJTtcclxuICBtYXJnaW46IC41ZW0gYXV0bztcclxufVxyXG5cclxuaW5wdXQsIHNlbGVjdCwgdGV4dGFyZWEge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIGhlaWdodDogMmVtO1xyXG4gIGZvbnQtc2l6ZTogMWVtO1xyXG4gIHBhZGRpbmctbGVmdDogLjRlbTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICBjb2xvcjogd2hpdGU7XHJcblx0Ym9yZGVyOiAxcHggc29saWQgIzQ1QTI5RTtcclxuXHRib3JkZXItcmFkaXVzOiAuMjVyZW07XHJcblx0d2lkdGg6IDYwJTtcclxufSIsIi5jb250YWluZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG4gIGJvcmRlci1yYWRpdXM6IDEycHg7XG4gIHBhZGRpbmc6IDFlbTtcbiAgbWFyZ2luLXRvcDogMWVtO1xufVxuXG4ucm93IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjkpO1xuICBib3JkZXItcmFkaXVzOiAxMnB4O1xuICBtYXJnaW46IDFlbTtcbiAgcGFkZGluZzogMWVtO1xufVxuXG5oMiB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC13ZWlnaHQ6IGxpZ2h0ZXI7XG59XG5cbmgzLCBoNCwgYSB7XG4gIGZvbnQtd2VpZ2h0OiBsaWdodGVyO1xuICBtYXJnaW46IDA7XG59XG5cbmJ1dHRvbiB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBtYXJnaW46IGF1dG87XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbm9uZTtcbiAgcGFkZGluZzogNXB4IDEwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgZm9udC1mYW1pbHk6IEFyaWFsO1xufVxuXG5idXR0b246aG92ZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2ZkOGRjO1xufVxuXG5idXR0b24ge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luOiBhdXRvO1xuICBwYWRkaW5nOiA1cHggMTBweDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTgxODE4O1xuICBjb2xvcjogd2hpdGU7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYm9yZGVyOiAxcHggc29saWQgIzQ1QTI5RTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBjdXJzb3I6IGhhbmQ7XG59XG5cbmJ1dHRvbjp2aXNpdGVkLCBidXR0b246bGluayB7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuYnV0dG9uOmhvdmVyIHtcbiAgY29sb3I6ICMwMzliZTU7XG4gIGJhY2tncm91bmQtY29sb3I6ICNjZmQ4ZGM7XG59XG5cbmxhYmVsIHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdpZHRoOiAxMCU7XG4gIG1hcmdpbjogMC41ZW0gYXV0bztcbn1cblxuaW5wdXQsIHNlbGVjdCwgdGV4dGFyZWEge1xuICBkaXNwbGF5OiBibG9jaztcbiAgaGVpZ2h0OiAyZW07XG4gIGZvbnQtc2l6ZTogMWVtO1xuICBwYWRkaW5nLWxlZnQ6IDAuNGVtO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgY29sb3I6IHdoaXRlO1xuICBib3JkZXI6IDFweCBzb2xpZCAjNDVBMjlFO1xuICBib3JkZXItcmFkaXVzOiAwLjI1cmVtO1xuICB3aWR0aDogNjAlO1xufSJdfQ== */"]
     });
     /*@__PURE__*/
@@ -2915,6 +3019,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _services_settings_service__WEBPACK_IMPORTED_MODULE_1__["SettingsService"]
         }, {
           type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+        }, {
+          type: _services_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]
         }];
       }, null);
     })();
@@ -3041,10 +3147,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(SigninComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this23 = this;
+          var _this22 = this;
 
           this.authService.user$.subscribe(function (user) {
-            _this23.user = user;
+            _this22.user = user;
           });
         }
       }]);

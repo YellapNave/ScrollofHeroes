@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../models/pf2hero.model';
 import { HeroService } from '../services/hero.service';
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
 import { SettingsService } from '../services/settings.service';
 
 @Component({
@@ -19,9 +18,7 @@ export class DashboardComponent implements OnInit {
       this.settings.campaign$.subscribe(campaign => this.getHeroes())
     }
 
-  ngOnInit(): void {
-    this.getHeroes();
-  }
+  ngOnInit(): void { }
 
   getHeroes(): void {
     this.heroService.getHeroes()

@@ -28,13 +28,12 @@ export class HeroDetailComponent implements OnInit {
     private settings: SettingsService,
     ) {
       this.settings.campaign$.subscribe(campaign => this.getHero());
+      this.authService.user$.subscribe(user => this.userOwnsHero = 
+        user.characters.includes(this.key) || user.isAdmin);
      }
 
   ngOnInit(): void {
     this.key = this.route.snapshot.paramMap.get('key')
-    this.authService.user$.subscribe(user => this.userOwnsHero = 
-      user.characters.includes(this.key) || user.isAdmin);
-    this.getHero();
   }
 
   getHero(): void {

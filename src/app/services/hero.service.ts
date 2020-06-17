@@ -35,7 +35,7 @@ export class HeroService {
         if (campaign.key !== "") {
           this.heroesChapter = 
             this.db.collection<Hero>(`/campaigns/${campaign.key}/heroes`);
-            this.log(`Fetched campaign: ${campaign.title}`);
+            this.log(`fetched campaign: ${campaign.title}`);
         }
       })
     }

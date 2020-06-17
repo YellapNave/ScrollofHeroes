@@ -15,6 +15,7 @@ export class SettingsService {
   // campaign stuff
   public campaign$: BehaviorSubject<Campaign>;
   public campaignList: Campaign[];
+  public showMessages: boolean = false;
   private campaigns: Observable<Campaign[]>;
   private user: User;
 
@@ -22,7 +23,7 @@ export class SettingsService {
     private firestore: AngularFirestore,
     private authService: AuthService) {
       this.db = this.firestore;
-      this.campaign$ = new BehaviorSubject<Campaign>({key: ""});
+      this.campaign$ = new BehaviorSubject<Campaign>({key: ""});;
       this.authService.user$.subscribe(user => {
         this.user = user;
         this.setCampaigns();

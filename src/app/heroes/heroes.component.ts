@@ -24,9 +24,7 @@ export class HeroesComponent implements OnInit {
       this.settings.campaign$.subscribe(campaign => this.getHeroes());
     }            
 
-  ngOnInit(): void {
-    this.getHeroes();
-  }
+  ngOnInit(): void { }
 
   getHeroes(): void {
     this.authService.user$.subscribe(user => {
@@ -48,7 +46,4 @@ export class HeroesComponent implements OnInit {
     this.heroes = this.heroes.filter(h => h.key !== key);
     this.heroService.deleteHero(key);
   }
-
-  
-
 }
